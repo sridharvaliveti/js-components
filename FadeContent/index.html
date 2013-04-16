@@ -1,0 +1,95 @@
+<html>
+<head>
+    <style>
+        body
+        {
+            color: #555;
+            background: #f0f0ec;
+        }
+
+        #container-monial
+        {
+            width: 660px;
+            margin: 8px auto;
+        }
+
+        #container-monial h1
+        {
+            text-shadow: 0 1px 1px #fff;
+            border-bottom: 1px solid #dce0d9;
+            line-height: 1.1111;
+            color: #792c5c;
+            letter-spacing: -0.03125em;
+            margin: 0.375em 0 0.25em;
+            padding-bottom: 0.25em;
+            text-align: center;
+            font-size: 4em;
+            font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+        }
+
+        #container-monial p
+        {
+            font-family: 'Vollkorn', Georgia, Times, serif;
+            font-size: 1.75rem;
+            line-height: 1.1429;
+            text-align: center;
+
+        }
+
+        #test
+        {
+            display: none;
+        }
+
+        .quote
+        {
+            font-size: 40px;
+            font-weight: bold;
+            font-style: italic;
+            position: relative;
+            top: 16px;
+            padding: 0 7px 0 3px;
+            line-height: 0;
+            color: #6E6E6E;
+            display: inline;
+            top: 0px;
+        }
+
+    </style>
+    <link href="http://fonts.googleapis.com/css?family=Ubuntu:bold" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Vollkorn" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div id="container-monial">
+    <h1>what our customers are saying</h1>
+    <div id="test">
+        <p><span class="quote">&ldquo;</span>1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lobortis dui quis erat aliquet accumsan. Ut nec nunc ipsum, laoreet bibendum lacus. Sed vestibulum aliquet elementum. <span class="quote">&rdquo;</span></p>
+        <p><span class="quote">&ldquo;</span>2 A good test!<span class="quote">&rdquo;</span></p>
+        <p><span class="quote">&ldquo;</span>3 Maecenas suscipit mollis ante. Sed quis nulla in ante iaculis molestie. In at metus et velit venenatis rhoncus id in tortor. Aliquam est elit, accumsan vitae lobortis eget, iaculis quis arcu. <span class="quote">&rdquo;</span></p>
+        <p><span class="quote">&ldquo;</span>4 Nulla vestibulum aliquam neque eget egestas. Nunc fermentum ligula et eros rutrum a consectetur lacus faucibus.<span class="quote">&rdquo;</span></p>
+    </div>
+    <button id="eep">NEXT</button>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="FadeContent.js"></script>
+
+<script>
+
+    $(document).ready(function() {
+
+        var NewFlyout = new FadeContent({
+            button: $('#eep'),
+            element: $('#test'),
+            duration: 2000,
+            fadeIn: 200,
+            fadeOut: 200
+        });
+    });
+
+</script>
+
+</body>
+</html>

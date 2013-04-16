@@ -1,4 +1,4 @@
 js-components
 =============
 
-js component lib
+js component lib kit
