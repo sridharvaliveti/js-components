@@ -20,13 +20,13 @@ $(document).ready(function($) {
         answers.css('cursor', 'pointer');
         //events
         answers.on({
-            "mouseenter" : function(e){
+            'mouseenter' : function(e){
                 $(this).find(".answer_icon").css("backgroundPosition", "-79px 0px");
             },
-            "mouseleave" : function(e){
+            'mouseleave' : function(e){
                 $(this).find(".answer_icon").css("backgroundPosition", "1px 0px");
             },
-            "click" : function(e){
+            'click' : function(e){
                 userWeights.push($(this).data("weight"));
                 hideQuestion(currentQuestion);
                 currentQuestion++;
