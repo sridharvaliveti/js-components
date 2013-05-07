@@ -10,52 +10,77 @@
 <body>
 
 <article>
-    <h2><span>test</span><div class="current_question"></div></h2>
 
-    <div id="quiz_container" class="answer_list" data-category="test">
+
+    <div id="quiz_container" class="answer_list" data-type="0" data-category="test">
+        <h2><span>test</span><div class="current_question"></div></h2>
         <div class="quiz_question">
             <ul>
                 <h3>Question???</h3>
-                    <li data-weight="4">
-                        <div class="answer_icon"></div>
-                        <div class="answer_content">
-                        ootie</div>
-                    </li>
 
-                    <li data-weight="2">
-                        <div class="answer_icon"></div>
-                        <div class="answer_content">
-                        eep</div>
-                    </li>
+                <li data-weight="4">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    ootie</div>
+                </li>
 
-                    <li data-weight="1">
-                        <div class="answer_icon"></div>
-                        <div class="answer_content">
-                        lamone</div>
-                    </li>
+                <li data-weight="2">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    eep</div>
+                </li>
+
+                <li data-weight="1">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    lamone</div>
+                </li>
             </ul>
         </div>
 
         <div class="quiz_question">
             <ul>
                 <h3>Question? Two</h3>
-                    <li data-weight="4">
-                        <div class="answer_icon"></div>
-                        <div class="answer_content">
-                        Sup Dun</div>
-                    </li>
+                <li data-weight="4">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    Sup Dun</div>
+                </li>
 
-                    <li data-weight="2">
-                        <div class="answer_icon"></div>
-                        <div class="answer_content">
-                        coming alive</div>
-                    </li>
+                <li data-weight="2">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    coming alive</div>
+                </li>
 
-                    <li data-weight="1">
-                        <div class="answer_icon"></div>
-                        <div class="answer_content">
-                        roll out</div>
-                    </li>
+                <li data-weight="1">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    roll out</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="quiz_question">
+            <ul>
+                <h3>Question? THREE</h3>
+                <li data-weight="2">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    Shaman</div>
+                </li>
+
+                <li data-weight="5">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    illusionist</div>
+                </li>
+
+                <li data-weight="15555">
+                    <div class="answer_icon"></div>
+                    <div class="answer_content">
+                    barb</div>
+                </li>
             </ul>
         </div>
 
@@ -68,19 +93,12 @@
 <script src="Quiz.js"></script>
 <script>
     $(document).ready(function () {
-        //Let There Be Quiz!
-        showQuestion(0);
-       /* this.sampleStepper = new NumberStep({
-            field : '#divide-meal',
-            up: '#up',
-            down: '#down',
-            min: 1,
-            max: 99999,
-            step: 6
+        var quiz = new Quiz({
+            type: 0,
+            element: $('#quiz_container')
+
         });
-
-        console.log(this.sampleStepper.GetStep());*/
-
+        quiz.ToggleQuestion(0);
     });
 </script>
 </body>
