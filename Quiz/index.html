@@ -10,8 +10,6 @@
 <body>
 
 <article>
-
-
     <div id="quiz_container" class="answer_list" data-type="0" data-category="test">
         <h2><span>test</span><div class="current_question"></div></h2>
         <div class="quiz_question">
@@ -76,7 +74,7 @@
                     illusionist</div>
                 </li>
 
-                <li data-weight="15555">
+                <li data-weight="4">
                     <div class="answer_icon"></div>
                     <div class="answer_content">
                     barb</div>
@@ -92,8 +90,9 @@
 
 <script src="Quiz.js"></script>
 <script>
+    var quiz;
     $(document).ready(function () {
-        var quiz = new Quiz({
+         quiz = new Quiz({
             type: 0,
             element: $('#quiz_container')
 

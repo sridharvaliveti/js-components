@@ -5,13 +5,13 @@
      * @param {array} Questions    array of questions & answers
      */
     Quiz = function (config) {
-
         config = (config = config || {});
         this.Questions = config.questions;
         this.Type = config.type;
         this.Element = $(config.element);
         this.CurrentQuestion = 0;
         this.UserWeights = [];
+        this.PrevQuestion = this.CurrentQuestion;
         _scope = this;
 
         //enumeration types for grading
@@ -53,32 +53,19 @@
                 default:
                     //default behavior
             }
-
-        },
-
-        /**
-         * GetQuestions
-         * @return {Number}   Returns a number value containing the value of the stepper input */
-        GetQuestions: function()
-        {
-            return this.Questions;
-        },
-
-        /**
-         * SetQuestions
-         * Sets the number value of the stepper input */
-        SetQuestions: function(questions)
-        {
-            this.Questions = questions;
         },
 
         ToggleQuestion : function(id)
         {
-            //show/hide a specific question
-            //get question
-            this.Element.fadeIn();
+
             this.Questions = this.Element.find($('.quiz_question'));
-            this.Questions.eq(id).fadeIn();
+
+            this.CurrentQuestion = id;
+            //hide all
+            this.Questions.hide();
+            //display specific:
+            this.Questions.eq(id).show();
+
             var questionCounter = this.Element.find('.current_question');
             questionCounter.text(this.CurrentQuestion + 1 +  " / " + this.Questions.length);
 
@@ -95,13 +82,21 @@
                 'click' : function(e){
                     _scope.UserWeights.push($(this).data("weight"));
                     _scope.Questions.eq(id).hide();
-                    _scope.CurrentQuestion++;
-                    //end quiz or keep going:
-                   if(_scope.CurrentQuestion == _scope.Questions.length)
-                       _scope.Grade();
-                   else
-                       _scope.ToggleQuestion(_scope.CurrentQuestion);
 
+
+                    //console.log(_scope.CurrentQuestion++);
+                    //end quiz or keep going:
+                    var nextId = id + 1;
+                   if(nextId == _scope.Questions.length)
+                   {
+                       _scope.Grade();
+                       _scope.CurrentQuestion = 0;
+                   }
+                   else
+                   {
+                       _scope.CurrentQuestion++;
+                       _scope.ToggleQuestion(_scope.CurrentQuestion);
+                   }
                 }
             });
         }
