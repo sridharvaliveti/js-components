@@ -55,7 +55,6 @@
 
         ToggleQuestion : function(id)
         {
-
             this.Questions = this.Element.find($('.quiz_question'));
             //hide all
             this.Questions.hide();
@@ -78,6 +77,10 @@
                     _scope.UserWeights.push($(this).data("weight"));
                     _scope.Questions.eq(id).hide();
 
+                    //reset previous answer:
+                    $(this).parent().find('.userChoice').removeClass('userChoice');
+                    //add new selection
+                    $(this).addClass("userChoice");
                     //end quiz or keep going:
                     (id + 1 == _scope.Questions.length) ? _scope.Grade() : _scope.ToggleQuestion(id + 1)
                 }

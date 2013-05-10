@@ -552,6 +552,13 @@ footer
 }
 
 
+/* SHIT QUIZ CSS HERE*/
+.userChoice
+{
+    background: #dd99aa;
+}
+
+
 
 
 
@@ -750,4 +757,6 @@ footer
     h3 {
         page-break-after: avoid;
     }
+
+
 }

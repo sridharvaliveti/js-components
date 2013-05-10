@@ -22,7 +22,7 @@
                     ootie</div>
                 </li>
 
-                <li data-weight="2">
+                <li data-weight="2" data-answer="true">
                     <div class="answer_icon"></div>
                     <div class="answer_content">
                     eep</div>
@@ -39,7 +39,7 @@
         <div class="quiz_question">
             <ul>
                 <h3>Question? Two</h3>
-                <li data-weight="4">
+                <li data-weight="4" data-answer="true">
                     <div class="answer_icon"></div>
                     <div class="answer_content">
                     Sup Dun</div>
@@ -74,7 +74,7 @@
                     illusionist</div>
                 </li>
 
-                <li data-weight="4">
+                <li data-weight="4" data-answer="true">
                     <div class="answer_icon"></div>
                     <div class="answer_content">
                     barb</div>
@@ -93,9 +93,8 @@
     var quiz;
     $(document).ready(function () {
          quiz = new Quiz({
-            type: 0,
+            type: 1,
             element: $('#quiz_container')
-
         });
         quiz.ToggleQuestion(0);
     });
