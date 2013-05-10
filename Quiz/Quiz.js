@@ -9,9 +9,7 @@
         this.Questions = config.questions;
         this.Type = config.type;
         this.Element = $(config.element);
-        this.CurrentQuestion = 0;
         this.UserWeights = [];
-        this.PrevQuestion = this.CurrentQuestion;
         _scope = this;
 
         //enumeration types for grading
@@ -41,7 +39,7 @@
                     }
 
                     var results = this.Element.find('#results');
-                    results.show().append('total weight: ' + totalWeight);
+                    results.show().html('total weight: ' + totalWeight);
 
                     break;
 
@@ -59,15 +57,12 @@
         {
 
             this.Questions = this.Element.find($('.quiz_question'));
-
-            this.CurrentQuestion = id;
             //hide all
             this.Questions.hide();
             //display specific:
             this.Questions.eq(id).show();
-
             var questionCounter = this.Element.find('.current_question');
-            questionCounter.text(this.CurrentQuestion + 1 +  " / " + this.Questions.length);
+            questionCounter.text(id + 1 +  " / " + this.Questions.length);
 
             var answers = this.Questions.eq(id).find("li");
             answers.css('cursor', 'pointer');
@@ -83,20 +78,8 @@
                     _scope.UserWeights.push($(this).data("weight"));
                     _scope.Questions.eq(id).hide();
 
-
-                    //console.log(_scope.CurrentQuestion++);
                     //end quiz or keep going:
-                    var nextId = id + 1;
-                   if(nextId == _scope.Questions.length)
-                   {
-                       _scope.Grade();
-                       _scope.CurrentQuestion = 0;
-                   }
-                   else
-                   {
-                       _scope.CurrentQuestion++;
-                       _scope.ToggleQuestion(_scope.CurrentQuestion);
-                   }
+                    (id + 1 == _scope.Questions.length) ? _scope.Grade() : _scope.ToggleQuestion(id + 1)
                 }
             });
         }
