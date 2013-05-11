@@ -44,8 +44,30 @@
                     break;
 
                 case Quiz.TYPE.EXACT:
+
+                    var answerKey = [];
+                    var correct = 0;
+                    //user answers:
+                    var userAnswers = _scope.Questions.find($('.userChoice'));
+                    //quiz answers:
+                    this.Questions.find('li').each(function(){
+                       if($(this).data('answer'))
+                       {
+                           answerKey.push($(this))
+                       }
+                    });
+
+                    //grade:
+                    for(var currentAnswer = 0; currentAnswer < answerKey.length; currentAnswer++)
+                    {
+                        if($(userAnswers).eq(currentAnswer).html() == answerKey[currentAnswer].html())
+                            correct++;
+                    }
+
+                    var total = correct / answerKey.length;
+                    var percent = Math.ceil(total * 100);
                     var results = this.Element.find('#results');
-                    results.show().append('EXACTNESS:');
+                    results.show().append(correct + " / " + answerKey.length + '<br><br> percent: ' + percent + '%' );
                     break;
 
                 default:
@@ -63,6 +85,7 @@
             var questionCounter = this.Element.find('.current_question');
             questionCounter.text(id + 1 +  " / " + this.Questions.length);
 
+            //choices:
             var answers = this.Questions.eq(id).find("li");
             answers.css('cursor', 'pointer');
             //events
