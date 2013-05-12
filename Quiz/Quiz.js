@@ -1,7 +1,7 @@
 ;(function ($) {
     /**
      * Quiz
-     * @classDescription: creates a number stepper with events
+     * @classDescription: creates a quiz
      * @param {array} Questions    array of questions & answers
      */
     Quiz = function (config) {
@@ -21,13 +21,13 @@
 
     Quiz.prototype = {
         /**
-         * Validate
-         * @classDescription: performs validation based on min/max and increases by step.
-         * @param {enum} type   enumeration based on the type of validation to perform (up/down)
+         * Grade
+         * @classDescription: grades quiz based on type.
          */
 
         Grade : function()
         {
+            var results = this.Element.find('#results');
             switch(this.Type)
             {
                 case Quiz.TYPE.WEIGHT:
@@ -38,7 +38,6 @@
                         totalWeight += this.UserWeights[currentAnswer];
                     }
 
-                    var results = this.Element.find('#results');
                     results.show().html('total weight: ' + totalWeight);
 
                     break;
@@ -51,10 +50,10 @@
                     var userAnswers = _scope.Questions.find($('.userChoice'));
                     //quiz answers:
                     this.Questions.find('li').each(function(){
-                       if($(this).data('answer'))
-                       {
-                           answerKey.push($(this))
-                       }
+                        if($(this).data('answer'))
+                        {
+                            answerKey.push($(this))
+                        }
                     });
 
                     //grade:
@@ -66,7 +65,6 @@
 
                     var total = correct / answerKey.length;
                     var percent = Math.ceil(total * 100);
-                    var results = this.Element.find('#results');
                     results.show().append(correct + " / " + answerKey.length + '<br><br> percent: ' + percent + '%' );
                     break;
 
