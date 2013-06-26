@@ -82,6 +82,11 @@
             </ul>
         </div>
 
+        <div id="quiz_nav">
+            <div class="back">BACK</div>
+            <div class="next">NEXT</div>
+        </div>
+
         <div id="results">
             <h3>your results:</h3>
         </div>
@@ -94,7 +99,9 @@
     $(document).ready(function () {
          quiz = new Quiz({
             type: 1,
-            element: $('#quiz_container')
+            element: $('#quiz_container'),
+            backBtn: $('.back'),
+            nextBtn: $('.next')
         });
         quiz.ToggleQuestion(0);
     });

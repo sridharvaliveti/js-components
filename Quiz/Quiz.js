@@ -10,6 +10,9 @@
         this.Type = config.type;
         this.Element = $(config.element);
         this.UserWeights = [];
+        this.BackBtn = $(config.backBtn);
+        this.NextBtn = $(config.nextBtn);
+        this.CurrentQuestion = null;
         _scope = this;
 
         //enumeration types for grading
@@ -17,6 +20,46 @@
             WEIGHT: 0,
             EXACT: 1
         };
+
+        //assign gui
+
+        if(this.BackBtn)
+        {
+            this.Element.find(this.BackBtn).on("click", function(e)
+            {
+                e.preventDefault();
+
+                if(_scope.CurrentQuestion > 0)
+                {
+                    _scope.CurrentQuestion--;
+                    _scope.ToggleQuestion(_scope.CurrentQuestion);
+                }
+                else
+                {
+                    _scope.CurrentQuestion = 0;
+                    _scope.ToggleQuestion(_scope.CurrentQuestion);
+                }
+            });
+        }
+
+        if(this.NextBtn)
+        {
+            this.Element.find(this.NextBtn).on("click", function(e)
+            {
+                e.preventDefault();
+                console.log(_scope.Element.find('.quiz_question').length)
+                if(_scope.CurrentQuestion < _scope.Element.find('.quiz_question').length -1)
+                {
+                    _scope.CurrentQuestion++;
+                    _scope.ToggleQuestion(_scope.CurrentQuestion);
+                }
+                else
+                {
+                    _scope.CurrentQuestion = _scope.Element.find('.quiz_question').length -1;
+                    _scope.ToggleQuestion(_scope.CurrentQuestion);
+                }
+            });
+        }
     };
 
     Quiz.prototype = {
@@ -65,7 +108,7 @@
 
                     var total = correct / answerKey.length;
                     var percent = Math.ceil(total * 100);
-                    results.show().append(correct + " / " + answerKey.length + '<br><br> percent: ' + percent + '%' );
+                    results.html('').show().append(correct + " / " + answerKey.length + '<br><br> percent: ' + percent + '%' );
                     break;
 
                 default:
@@ -80,6 +123,7 @@
             this.Questions.hide();
             //display specific:
             this.Questions.eq(id).show();
+            this.CurrentQuestion = id;
             var questionCounter = this.Element.find('.current_question');
             questionCounter.text(id + 1 +  " / " + this.Questions.length);
 
