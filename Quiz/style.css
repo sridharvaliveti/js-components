@@ -145,7 +145,7 @@ header li
 {
     float: left;
     margin-left: 20px;
-    background-image: url(/tpl/img/icons.png);
+
     background-position: 0px -52px;
     width: 217px;
     height: 68px;
@@ -276,9 +276,9 @@ h2
 
 }
 
-.prev
+.back
 {
-    background-image: url(/tpl/img/icons.png);
+
     background-position: -40px 0px;
     width: 37px;
     height: 36px;
@@ -288,13 +288,15 @@ h2
 
 .next
 {
-    background-image: url(/tpl/img/icons.png);
+
     background-position: -80px 0px;
     width: 37px;
     height: 36px;
     float: right;
     cursor: pointer;
 }
+
+
 
 .random_verse
 {
@@ -305,7 +307,7 @@ h2
 {
     width: 47px;
     height: 18px;
-    background-image: url(/tpl/img/icons.png);
+
     background-position: -296px -111px;
     background-repeat: no-repeat;
     cursor: pointer;
@@ -370,42 +372,7 @@ h2
     cursor: pointer;
 }
 
-.marriage
-{
-    background-image: url(/tpl/img/icons.png);
-    background-position: -176px 0px;
-}
 
-.finance
-{
-    background-image: url(/tpl/img/icons.png);
-    background-position: -233px 0px;
-}
-
-.parenting
-{
-    background-image: url(/tpl/img/icons.png);
-    background-position: -120px 0px;
-}
-
-.happiness
-{
-    background-image: url(/tpl/img/icons.png);
-    background-position: -290px -55px;
-}
-
-.lost
-{
-    background-image: url(/tpl/img/icons.png);
-    background-position: -289px 0px;
-}
-
-.jesus
-{
-    background-image: url(/tpl/img/icons.png);
-    background-position: -233px -56px;
-
-}
 
 .cat_title
 {
@@ -476,8 +443,7 @@ h2
 
 .answer_icon
 {
-    background-image: url(/tpl/img/icons.png);
-    background-position: 1px 0px;
+
     width: 37px;
     height: 36px;
     float: left;

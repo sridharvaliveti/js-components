@@ -4,94 +4,97 @@
     <title>Quiz Example</title>
 
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/gumby.css">
+
 </head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <body>
+<div class="container">
+    <div class="row">
+        <div id="quiz_container" class="answer_list twelve columns" data-type="0" data-category="test">
+            <h2><span>test</span><div class="current_question"></div></h2>
+            <div class="quiz_question">
+                <ul>
+                    <h3>Question???</h3>
 
-<article>
-    <div id="quiz_container" class="answer_list" data-type="0" data-category="test">
-        <h2><span>test</span><div class="current_question"></div></h2>
-        <div class="quiz_question">
-            <ul>
-                <h3>Question???</h3>
+                    <li class="data-weight="4">
+                        <div class="answer_content medium info btn icon-left entypo icon-mail">
+                            <a href="#">Shaman</a>
+                        </div>
+                    </li>
 
-                <li data-weight="4">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    ootie</div>
-                </li>
+                    <li data-weight="2" data-answer="true">
+                        <div class="answer_content medium info btn icon-left entypo icon-mail">
+                            <a href="#">eep</a>
+                        </div>
+                    </li>
 
-                <li data-weight="2" data-answer="true">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    eep</div>
-                </li>
+                    <li data-weight="1">
+                        <div class="answer_content medium info btn icon-left entypo icon-mail">
+                            <a href="#">Tail SPin</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
-                <li data-weight="1">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    lamone</div>
-                </li>
-            </ul>
+            <div class="quiz_question">
+                <ul>
+                    <h3>Question? Two</h3>
+                    <li data-weight="4" data-answer="true">
+                        <div class="answer_content  medium info btn icon-left entypo icon-mail">
+                            <a href="#">Sup Dun</a>
+                        </div>
+                    </li>
+
+                    <li data-weight="2">
+                        <div class="answer_content  medium info btn icon-left entypo icon-mail">
+                             <a href="#">Jonty</a>
+                        </div>
+                    </li>
+
+                    <li data-weight="1">
+                        <div class="answer_content  medium info btn icon-left entypo icon-mail">
+                             <a href="#">Bevel</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="quiz_question">
+                <ul>
+                    <h3>Question? THREE</h3>
+                    <li data-weight="2">
+                        <div class="answer_content  medium info btn icon-left entypo icon-mail">
+                            <a href="#">Logd</a>
+                        </div>
+                    </li>
+
+                    <li data-weight="5">
+                        <div class="answer_content  medium info btn icon-left entypo icon-mail">
+                             <a href="#">Illusionist</a>
+                        </div>
+                    </li>
+
+                    <li data-weight="4" data-answer="true">
+                        <div class="answer_content  medium info btn icon-left entypo icon-mail">
+                            <a href="#">Gooto</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="quiz_nav">
+                <div class="back medium primary btn"><a href="#">BACK</a></div>
+                <div class="next medium primary btn"><a href="#">NEXT</a></div>
+            </div>
+
+            <div id="results">
+                <h3>your results:</h3>
+            </div>
         </div>
-
-        <div class="quiz_question">
-            <ul>
-                <h3>Question? Two</h3>
-                <li data-weight="4" data-answer="true">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    Sup Dun</div>
-                </li>
-
-                <li data-weight="2">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    coming alive</div>
-                </li>
-
-                <li data-weight="1">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    roll out</div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="quiz_question">
-            <ul>
-                <h3>Question? THREE</h3>
-                <li data-weight="2">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    Shaman</div>
-                </li>
-
-                <li data-weight="5">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    illusionist</div>
-                </li>
-
-                <li data-weight="4" data-answer="true">
-                    <div class="answer_icon"></div>
-                    <div class="answer_content">
-                    barb</div>
-                </li>
-            </ul>
-        </div>
-
-        <div id="quiz_nav">
-            <div class="back">BACK</div>
-            <div class="next">NEXT</div>
-        </div>
-
-        <div id="results">
-            <h3>your results:</h3>
-        </div>
-    </div>
-</article>
+     </div>
+</div>
 
 <script src="Quiz.js"></script>
 <script>
