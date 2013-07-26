@@ -13,6 +13,7 @@
         this.BackBtn = $(config.backBtn);
         this.NextBtn = $(config.nextBtn);
         this.CurrentQuestion = null;
+        this.ProgressBar = $(config.progressBar);
         _scope = this;
 
         //enumeration types for grading
@@ -47,7 +48,7 @@
             this.Element.find(this.NextBtn).on("click", function(e)
             {
                 e.preventDefault();
-                console.log(_scope.Element.find('.quiz_question').length)
+
                 if(_scope.CurrentQuestion < _scope.Element.find('.quiz_question').length -1)
                 {
                     _scope.CurrentQuestion++;
@@ -55,8 +56,7 @@
                 }
                 else
                 {
-                    _scope.CurrentQuestion = _scope.Element.find('.quiz_question').length -1;
-                    _scope.ToggleQuestion(_scope.CurrentQuestion);
+                   _scope.Grade();
                 }
             });
         }
@@ -90,25 +90,35 @@
                     var answerKey = [];
                     var correct = 0;
                     //user answers:
+                    var userTest = [];
+
+                    this.Questions.find('.userChoice').each(function(){
+                        userTest.push($(this).html())
+                    })
+
                     var userAnswers = _scope.Questions.find($('.userChoice'));
                     //quiz answers:
                     this.Questions.find('li').each(function(){
                         if($(this).data('answer'))
                         {
-                            answerKey.push($(this))
+                            answerKey.push($(this).html())
                         }
                     });
+                    //COUNT as question that has multiple answers
+                    console.log(userTest)
+                    console.log(answerKey)
 
                     //grade:
                     for(var currentAnswer = 0; currentAnswer < answerKey.length; currentAnswer++)
                     {
-                        if($(userAnswers).eq(currentAnswer).html() == answerKey[currentAnswer].html())
+
+                        if(userTest[currentAnswer] == answerKey[currentAnswer])
                             correct++;
                     }
 
-                    var total = correct / answerKey.length;
+                    var total = correct / this.Questions.length;
                     var percent = Math.ceil(total * 100);
-                    results.html('').show().append(correct + " / " + answerKey.length + '<br><br> percent: ' + percent + '%' );
+                    results.html('').show().append(correct + " / " + this.Questions.length + '<br><br> percent: ' + percent + '%' );
                     break;
 
                 default:
@@ -131,23 +141,14 @@
             var answers = this.Questions.eq(id).find("li");
             answers.css('cursor', 'pointer');
             //events
+            //reset any click events:
+            answers.off('click');
             answers.on({
-                'mouseenter' : function(e){
-                    $(this).find(".answer_icon").css("backgroundPosition", "-79px 0px");
-                },
-                'mouseleave' : function(e){
-                    $(this).find(".answer_icon").css("backgroundPosition", "1px 0px");
-                },
                 'click' : function(e){
+                    e.preventDefault();
                     _scope.UserWeights.push($(this).data("weight"));
-                    _scope.Questions.eq(id).hide();
-
-                    //reset previous answer:
-                    $(this).parent().find('.userChoice').removeClass('userChoice');
-                    //add new selection
-                    $(this).addClass("userChoice");
-                    //end quiz or keep going:
-                    (id + 1 == _scope.Questions.length) ? _scope.Grade() : _scope.ToggleQuestion(id + 1)
+                    //allow multiple choice:
+                    ($(this).hasClass("userChoice")) ? $(this).removeClass("userChoice") : $(this).addClass("userChoice");
                 }
             });
         }
