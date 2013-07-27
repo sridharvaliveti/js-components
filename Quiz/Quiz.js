@@ -14,6 +14,7 @@
         this.NextBtn = $(config.nextBtn);
         this.CurrentQuestion = null;
         this.ProgressBar = $(config.progressBar);
+        this.Results = null;
         _scope = this;
 
         //enumeration types for grading
@@ -22,53 +23,61 @@
             EXACT: 1
         };
 
-        //assign gui
-
-        if(this.BackBtn)
-        {
-            this.Element.find(this.BackBtn).on("click", function(e)
-            {
-                e.preventDefault();
-
-                //shows next button if not on results:
-                if(_scope.NextBtn.not(":visible"))
-                {
-                    _scope.NextBtn.show();
-                }
-
-                if(_scope.CurrentQuestion > 0)
-                {
-                    _scope.CurrentQuestion--;
-                    _scope.ToggleQuestion(_scope.CurrentQuestion);
-                }
-                else
-                {
-                    _scope.CurrentQuestion = 0;
-                    _scope.ToggleQuestion(_scope.CurrentQuestion);
-                }
-            });
-        }
-
-        if(this.NextBtn)
-        {
-            this.Element.find(this.NextBtn).on("click", function(e)
-            {
-                e.preventDefault();
-
-                if(_scope.CurrentQuestion < _scope.Element.find('.quiz_question').length -1)
-                {
-                    _scope.CurrentQuestion++;
-                    _scope.ToggleQuestion(_scope.CurrentQuestion);
-                }
-                else
-                {
-                   _scope.Grade();
-                }
-            });
-        }
+        this.Init();
     };
 
     Quiz.prototype = {
+
+        Init : function()
+        {
+            //assign gui
+            if(this.BackBtn)
+            {
+                this.Element.find(this.BackBtn).on("click", function(e)
+                {
+                    e.preventDefault();
+
+                    //shows next button if not on results:
+                    if(_scope.NextBtn.not(":visible"))
+                    {
+                        _scope.NextBtn.show();
+                    }
+                    if(_scope.Results.is(":visible"))
+                    {
+                        _scope.Results.hide();
+                    }
+
+                    if(_scope.CurrentQuestion > 0)
+                    {
+                        _scope.CurrentQuestion--;
+                        _scope.ToggleQuestion(_scope.CurrentQuestion);
+                    }
+                    else
+                    {
+                        _scope.CurrentQuestion = 0;
+                        _scope.ToggleQuestion(_scope.CurrentQuestion);
+                    }
+                });
+            }
+
+            if(this.NextBtn)
+            {
+                this.Element.find(this.NextBtn).on("click", function(e)
+                {
+                    e.preventDefault();
+
+                    if(_scope.CurrentQuestion < _scope.Element.find('.quiz_question').length -1)
+                    {
+                        _scope.CurrentQuestion++;
+                        _scope.ToggleQuestion(_scope.CurrentQuestion);
+                    }
+                    else
+                    {
+                       _scope.Grade();
+                    }
+                });
+            }
+        },
         /**
          * Grade
          * @classDescription: grades quiz based on type.
@@ -76,7 +85,7 @@
 
         Grade : function()
         {
-            var results = this.Element.find('#results');
+            this.Results = this.Element.find('#results');
             switch(this.Type)
             {
                 case Quiz.TYPE.WEIGHT:
@@ -87,7 +96,7 @@
                         totalWeight += this.UserWeights[currentAnswer];
                     }
 
-                    results.show().html('total weight: ' + totalWeight);
+                    this.Results.show().html('total weight: ' + totalWeight);
 
                     break;
 
@@ -134,7 +143,7 @@
                     var total = totalCorrect / this.Questions.length;
                     var percent = Math.ceil(total * 100);
                     this.Questions.hide();
-                    results.html('').show().append('<h2>' + totalCorrect + ' / ' + this.Questions.length + '</h2><h2>percent: ' + percent + '%' + '</h2>');
+                    this.Results.html('').show().append('<h2>' + totalCorrect + ' / ' + this.Questions.length + '</h2><h2>percent: ' + percent + '%' + '</h2>');
                     this.CurrentQuestion++;
                     //hide next btn on grade:
                     this.NextBtn.hide();
