@@ -86,39 +86,50 @@
                     break;
 
                 case Quiz.TYPE.EXACT:
-
+                    //build answer key:
                     var answerKey = [];
-                    var correct = 0;
                     //user answers:
-                    var userTest = [];
+                    var userKey = [];
+                    this.Questions.find('ul').each(function(){
+                        var correctAnswers = [];
+                        var userAnswers = [];
 
-                    this.Questions.find('.userChoice').each(function(){
-                        userTest.push($(this).html())
-                    })
+                        $(this).find('li').each(function(){
+                            if($(this).data('answer'))
+                            {
+                                correctAnswers.push($(this).text());
+                            }
+                        });
 
-                    var userAnswers = _scope.Questions.find($('.userChoice'));
-                    //quiz answers:
-                    this.Questions.find('li').each(function(){
-                        if($(this).data('answer'))
-                        {
-                            answerKey.push($(this).html())
-                        }
+                        $(this).find('.userChoice').each(function(){
+                            userAnswers.push($(this).text());
+                        });
+
+                        answerKey.push({ answers : correctAnswers });
+                        userKey.push({ answers : userAnswers})
+
                     });
-                    //COUNT as question that has multiple answers
-                    console.log(userTest)
-                    console.log(answerKey)
-
                     //grade:
-                    for(var currentAnswer = 0; currentAnswer < answerKey.length; currentAnswer++)
+                    var totalCorrect = 0;
+                    var passed = false;
+                    for(var correctAnswer = 0; correctAnswer < answerKey.length; correctAnswer++)
                     {
+                        for(var userAnswer = 0; userAnswer < answerKey[correctAnswer].answers.length; userAnswer++)
+                        {
+                            (answerKey[correctAnswer].answers[userAnswer] == userKey[correctAnswer].answers[userAnswer]) ? passed = true : passed = false;
+                        }
 
-                        if(userTest[currentAnswer] == answerKey[currentAnswer])
-                            correct++;
+                        if(passed)
+                        {
+                            passed = false;
+                            totalCorrect++;
+                        }
                     }
 
-                    var total = correct / this.Questions.length;
+                    var total = totalCorrect / this.Questions.length;
                     var percent = Math.ceil(total * 100);
-                    results.html('').show().append(correct + " / " + this.Questions.length + '<br><br> percent: ' + percent + '%' );
+                    results.html('').show().append(totalCorrect + " / " + this.Questions.length + '<br><br> percent: ' + percent + '%' );
+
                     break;
 
                 default:
