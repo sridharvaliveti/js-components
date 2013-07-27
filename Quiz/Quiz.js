@@ -30,6 +30,12 @@
             {
                 e.preventDefault();
 
+                //shows next button if not on results:
+                if(_scope.NextBtn.not(":visible"))
+                {
+                    _scope.NextBtn.show();
+                }
+
                 if(_scope.CurrentQuestion > 0)
                 {
                     _scope.CurrentQuestion--;
@@ -97,17 +103,16 @@
                         $(this).find('li').each(function(){
                             if($(this).data('answer'))
                             {
-                                correctAnswers.push($(this).text());
+                                correctAnswers.push($(this).html());
                             }
                         });
 
                         $(this).find('.userChoice').each(function(){
-                            userAnswers.push($(this).text());
+                            userAnswers.push($(this).html());
                         });
 
                         answerKey.push({ answers : correctAnswers });
                         userKey.push({ answers : userAnswers})
-
                     });
                     //grade:
                     var totalCorrect = 0;
@@ -128,7 +133,11 @@
 
                     var total = totalCorrect / this.Questions.length;
                     var percent = Math.ceil(total * 100);
-                    results.html('').show().append(totalCorrect + " / " + this.Questions.length + '<br><br> percent: ' + percent + '%' );
+                    this.Questions.hide();
+                    results.html('').show().append('<h2>' + totalCorrect + ' / ' + this.Questions.length + '</h2><h2>percent: ' + percent + '%' + '</h2>');
+                    this.CurrentQuestion++;
+                    //hide next btn on grade:
+                    this.NextBtn.hide();
 
                     break;
 
