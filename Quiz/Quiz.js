@@ -130,7 +130,8 @@
                     {
                         for(var userAnswer = 0; userAnswer < answerKey[correctAnswer].answers.length; userAnswer++)
                         {
-                            (answerKey[correctAnswer].answers[userAnswer] == userKey[correctAnswer].answers[userAnswer]) ? passed = true : passed = false;
+                            if(answerKey[correctAnswer].answers.length == userKey[correctAnswer].answers.length)
+                                (answerKey[correctAnswer].answers[userAnswer] == userKey[correctAnswer].answers[userAnswer]) ? passed = true : passed = false;
                         }
 
                         if(passed)
