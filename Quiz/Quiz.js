@@ -30,6 +30,7 @@
 
         Init : function()
         {
+            this.Results = this.Element.find('#results');
             //assign gui
             if(this.BackBtn)
             {
@@ -42,11 +43,13 @@
                     {
                         _scope.NextBtn.show();
                     }
+
                     if(_scope.Results.is(":visible"))
                     {
                         _scope.Results.hide();
                     }
 
+                    //question back navigation:
                     if(_scope.CurrentQuestion > 0)
                     {
                         _scope.CurrentQuestion--;
@@ -85,7 +88,6 @@
 
         Grade : function()
         {
-            this.Results = this.Element.find('#results');
             switch(this.Type)
             {
                 case Quiz.TYPE.WEIGHT:
@@ -181,6 +183,13 @@
                     ($(this).hasClass("userChoice")) ? $(this).removeClass("userChoice") : $(this).addClass("userChoice");
                 }
             });
+            //Update quiz progress:
+            if(this.ProgressBar)
+            {
+                var width = $('#quiz_container').width();
+                var progress = width / this.Questions.length;
+                this.ProgressBar.width(progress * (this.CurrentQuestion + 1));
+            }
         }
     };
 })(jQuery);

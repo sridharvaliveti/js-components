@@ -88,3 +88,10 @@
 {
     background: #dd99aa;
 }
+
+#progressBar
+{
+    background: #0e90f8;
+    width: 1px;
+    height: 40px;
+}

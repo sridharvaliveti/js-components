@@ -84,11 +84,9 @@
                 </ul>
             </div>
 
-
             <div id="results">
                 <h3>your results:</h3>
             </div>
-
 
             <div id="quiz_nav">
                 <div class="back medium primary btn"><a href="#">BACK</a></div>
@@ -97,6 +95,9 @@
 
 
         </div>
+         <div class="row">
+                <div id="progressBar"> </div>
+            </div>
      </div>
 </div>
 
@@ -108,7 +109,8 @@
             type: 1,
             element: $('#quiz_container'),
             backBtn: $('.back'),
-            nextBtn: $('.next')
+            nextBtn: $('.next'),
+            progressBar : $('#progressBar')
         });
         quiz.ToggleQuestion(0);
     });
