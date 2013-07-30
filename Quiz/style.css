@@ -95,3 +95,8 @@
     width: 1px;
     height: 40px;
 }
+
+#pager li
+{
+    cursor: pointer;
+}

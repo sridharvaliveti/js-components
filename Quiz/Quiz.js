@@ -15,6 +15,7 @@
         this.CurrentQuestion = null;
         this.ProgressBar = $(config.progressBar);
         this.Results = null;
+        this.Pager = $(config.pager);
         _scope = this;
 
         //enumeration types for grading
@@ -189,6 +190,24 @@
                 var width = $('#quiz_container').width();
                 var progress = width / this.Questions.length;
                 this.ProgressBar.width(progress * (this.CurrentQuestion + 1));
+            }
+
+            //Pagination:
+            if(this.Pager)
+            {
+                var pager = '';
+                var activeClass = '';
+                for(var currentQuestion = 0; currentQuestion < this.Questions.length; currentQuestion++)
+                {
+                    (currentQuestion == this.CurrentQuestion) ? activeClass = "primary" : activeClass = "secondary"
+                    pager += '<li class="' + activeClass + ' badge" data-page="' + currentQuestion + '">' + Number(currentQuestion + 1) + '</li>';
+                }
+
+                this.Pager.html('');
+                this.Pager.append(pager);
+                this.Pager.find('li').on("click", function(){
+                   _scope.ToggleQuestion($(this).data('page'));
+                });
             }
         }
     };
