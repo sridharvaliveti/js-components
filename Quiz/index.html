@@ -12,95 +12,127 @@
 <body>
 <div class="container">
     <div class="row">
-        <div id="quiz_container" class="answer_list twelve columns" data-type="0" data-category="test">
-            <h2><span>test</span><div class="current_question"></div></h2>
-            <div class="quiz_question">
-                <ul>
-                    <h3>Question???</h3>
-
-                    <li data-weight="4">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                            <a href="#">Shaman</a>
-                        </div>
-                    </li>
-
-                    <li data-weight="2" data-answer="true">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                            <a href="#">eep</a>
-                        </div>
-                    </li>
-
-                    <li data-weight="1">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                            <a href="#">Tail SPin</a>
-                        </div>
-                    </li>
+        <div id="quiz_container" class="answer_list" data-type="0" data-category="test">
+            <!-- Quiz -->
+            <div class="row">
+                <ul class="two_up tiles">
+                    <li> <h2><span>test</span></h2></li>
+                    <li> <div class="current_question"></div></li>
                 </ul>
             </div>
 
-            <div class="quiz_question">
-                <ul>
-                    <h3>Question? Two</h3>
-                    <li data-weight="4" data-answer="true">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                            <a href="#">Sup Dun</a>
-                        </div>
-                    </li>
+            <div class="row">
+                <div class="quiz_question twelve columns ">
+                    <ul>
+                        <h3>Question???</h3>
 
-                    <li data-weight="2" data-answer="true">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                             <a href="#">Jonty</a>
-                        </div>
-                    </li>
+                        <li data-weight="4">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                <a href="#">Shaman</a>
+                            </div>
+                        </li>
 
-                    <li data-weight="1">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                             <a href="#">Bevel</a>
-                        </div>
-                    </li>
-                </ul>
+                        <li data-weight="2" data-answer="true">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                <a href="#">eep</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="1">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                <a href="#">Tail SPin</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="quiz_question">
-                <ul>
-                    <h3>Question? THREE</h3>
-                    <li data-weight="2">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                            <a href="#">Logd</a>
-                        </div>
-                    </li>
+            <div class="row">
+                <div class="quiz_question twelve columns">
+                    <ul>
+                        <h3>Question? Two</h3>
+                        <li data-weight="4" data-answer="true">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                <a href="#">Sup Dun</a>
+                            </div>
+                        </li>
 
-                    <li data-weight="5">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                             <a href="#">Illusionist</a>
-                        </div>
-                    </li>
+                        <li data-weight="2" data-answer="true">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                 <a href="#">Jonty</a>
+                            </div>
+                        </li>
 
-                    <li data-weight="4" data-answer="true">
-                        <div class="answer_content medium info btn icon-left entypo icon-mail">
-                            <a href="#">Gooto</a>
-                        </div>
-                    </li>
-                </ul>
+                        <li data-weight="1">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                 <a href="#">Bevel</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <div id="results">
-                <h3>your results:</h3>
+            <div class="row">
+                <div class="quiz_question twelve columns">
+                    <ul>
+                        <h3>Question? THREE</h3>
+                        <li data-weight="2">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                <a href="#">Logd</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="5">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                 <a href="#">Illusionist</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="4" data-answer="true">
+                            <div class="answer_content medium info btn icon-left entypo icon-mail">
+                                <a href="#">Gooto</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <div id="quiz_nav">
-                <div class="back medium primary btn"><a href="#">BACK</a></div>
-                <div class="next medium primary btn"><a href="#">NEXT</a></div>
+            <div class="row">
+                <div id="results">
+                    <h2>your results:</h2>
+
+                    <h3 class="totalCorrect">
+                        total correct:
+                    </h3>
+
+                    <h3 class="totalPercent">
+                        percent:
+                    </h3>
+
+                </div>
             </div>
 
+            <div class="row">
+                <div id="quiz_nav" class="twelve columns">
+                    <ul class="two_up tiles">
+                        <li><div class="back medium primary btn"><a href="#">BACK</a></div></li>
+                        <li><div class="next medium primary btn"><a href="#">NEXT</a></div></li>
+                    </ul>
+                </div>
+            </div>
 
         </div>
-         <div class="row">
-                <div id="progressBar"> </div>
-         </div>
 
         <div class="row">
-            <div id="pager" class="twelve columns"></div>
+             <div class="columns twelve">
+                  <div id="progressBar"></div>
+             </div>
+        </div>
+
+        <div class="row">
+            <div class="columns twelve">
+                <div id="pager" class="twelve columns"></div>
+            </div>
         </div>
      </div>
 </div>
@@ -115,7 +147,8 @@
             backBtn: $('.back'),
             nextBtn: $('.next'),
             progressBar : $('#progressBar'),
-            pager : $('#pager')
+            pager : $('#pager'),
+            results: $('#results')
         });
         quiz.ToggleQuestion(0);
     });

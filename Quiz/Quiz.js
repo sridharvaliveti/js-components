@@ -14,7 +14,7 @@
         this.NextBtn = $(config.nextBtn);
         this.CurrentQuestion = null;
         this.ProgressBar = $(config.progressBar);
-        this.Results = null;
+        this.Results = $(config.results);
         this.Pager = $(config.pager);
         _scope = this;
 
@@ -31,7 +31,26 @@
 
         Init : function()
         {
-            this.Results = this.Element.find('#results');
+            //timer
+
+            var count = 30;
+            var counter = setInterval(timer, 1000);
+
+            function timer()
+            {
+                count += - 1;
+                if(count <= 0)
+                {
+                    console.log("done!");
+                    clearInterval(counter);
+                    return;
+                }
+                console.log(count)
+            }
+
+
+            //copy result html to data:
+            this.Results.data('results', this.Results.html());
             //assign gui
             if(this.BackBtn)
             {
@@ -40,15 +59,7 @@
                     e.preventDefault();
 
                     //shows next button if not on results:
-                    if(_scope.NextBtn.not(":visible"))
-                    {
-                        _scope.NextBtn.show();
-                    }
-
-                    if(_scope.Results.is(":visible"))
-                    {
-                        _scope.Results.hide();
-                    }
+                    _scope.ToggleUI();
 
                     //question back navigation:
                     if(_scope.CurrentQuestion > 0)
@@ -100,6 +111,7 @@
                     }
 
                     this.Results.show().html('total weight: ' + totalWeight);
+                    ResetPager();
 
                     break;
 
@@ -147,15 +159,32 @@
                     var total = totalCorrect / this.Questions.length;
                     var percent = Math.ceil(total * 100);
                     this.Questions.hide();
-                    this.Results.html('').show().append('<h2>' + totalCorrect + ' / ' + this.Questions.length + '</h2><h2>percent: ' + percent + '%' + '</h2>');
+
+                    this.Results.html('').append(this.Results.data('results'));
+
+                    this.Results.find(".totalCorrect").append(totalCorrect + ' / ' + this.Questions.length)
+                    this.Results.find('.totalPercent').append(percent + '%');
+                    this.Results.show();
+
                     this.CurrentQuestion++;
                     //hide next btn on grade:
                     this.NextBtn.hide();
+                    ResetPager();
 
                     break;
 
                 default:
                     //default behavior
+            }
+
+            function ResetPager()
+            {
+                _scope.Pager.find('li').each(function(){
+                    if($(this).hasClass("primary"))
+                    {
+                        $(this).removeClass("primary").addClass("secondary");
+                    }
+                })
             }
         },
 
@@ -168,7 +197,7 @@
             this.Questions.eq(id).show();
             this.CurrentQuestion = id;
             var questionCounter = this.Element.find('.current_question');
-            questionCounter.text(id + 1 +  " / " + this.Questions.length);
+            questionCounter.html("<h2>" + Number(id + 1) +  " / " + this.Questions.length + "</h2>");
 
             //choices:
             var answers = this.Questions.eq(id).find("li");
@@ -184,6 +213,7 @@
                     ($(this).hasClass("userChoice")) ? $(this).removeClass("userChoice") : $(this).addClass("userChoice");
                 }
             });
+
             //Update quiz progress:
             if(this.ProgressBar)
             {
@@ -206,8 +236,22 @@
                 this.Pager.html('');
                 this.Pager.append(pager);
                 this.Pager.find('li').on("click", function(){
-                   _scope.ToggleQuestion($(this).data('page'));
+                    _scope.ToggleQuestion($(this).data('page'));
+                    _scope.ToggleUI();
+
                 });
+            }
+        },
+
+        ToggleUI : function(){
+            if(_scope.Results.is(":visible"))
+            {
+                _scope.Results.hide();
+            }
+
+            if(_scope.NextBtn.not(":visible"))
+            {
+                _scope.NextBtn.show();
             }
         }
     };
