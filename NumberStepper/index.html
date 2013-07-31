@@ -2,21 +2,30 @@
 <html>
 <head>
     <title>Number Stepper Example</title>
+    <link rel="stylesheet" href="css/gumby.css">
 </head>
 
-
 <body>
-
-<div class="twelve columns">
-    <div class="six columns">
-        <input id="divide-meal" data-setting="max" type="number" step="1" min="1" value="1" >
-    </div>
-
-    <div class="six columns">
-        <a id="up" href="#" data-setting="max" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="c" data-inline="true">Arrow up</a>
-        <a id="down" href="#" data-setting="max" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="c" data-inline="true">Arrow down</a>
+<div class="container">
+    <div class="row">
+        <div class="twelve columns">
+            <ul class="four_up tiles">
+                <li>
+                    <form>
+                        <ul>
+                            <li class="field">
+                                <input id="divide-meal" class="numeric input" data-setting="max" type="number" step="1" min="1" value="1">
+                            </li>
+                        </ul>
+                    </form>
+                </li>
+                <li><div id="up" class="medium info btn icon-left entypo icon-up-bold"><a href="#">Up</a></div></li>
+                <li><div id="down" class="medium info btn icon-left entypo icon-down-bold"><a href="#">Down</a></div></li>
+            </ul>
+        </div>
     </div>
 </div>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="NumberStepper.js"></script>
 <script>
