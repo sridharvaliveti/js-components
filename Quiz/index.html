@@ -134,12 +134,25 @@
                 <div id="pager" class="twelve columns"></div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="columns twelve">
+                <div id="timer"></div>
+            </div>
+        </div>
+
      </div>
 </div>
 
 <script src="Quiz.js"></script>
 <script>
     var quiz;
+    var counter = {
+        enabled : true,
+        display : true,
+        max_time : 100,
+        element : $('#timer')
+    }
     $(document).ready(function () {
          quiz = new Quiz({
             type: 1,
@@ -148,8 +161,12 @@
             nextBtn: $('.next'),
             progressBar : $('#progressBar'),
             pager : $('#pager'),
-            results: $('#results')
+            results: $('#results'),
+            timer : counter,
+            showCorrectAnswers : true,
+            allowUserCorrection : false
         });
+
         quiz.ToggleQuestion(0);
     });
 </script>

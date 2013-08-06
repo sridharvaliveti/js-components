@@ -67,3 +67,8 @@
 {
     cursor: pointer;
 }
+
+.correctAnswer
+{
+    background: #05390a;
+}

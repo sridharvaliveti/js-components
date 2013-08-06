@@ -16,6 +16,11 @@
         this.ProgressBar = $(config.progressBar);
         this.Results = $(config.results);
         this.Pager = $(config.pager);
+        this.Timer = config.timer;
+        this.ShowCorrectAnswers = config.showCorrectAnswers;
+        this.quizComplete = false;
+        this.counter;
+        this.AllowUserCorrection = config.allowUserCorrection
         _scope = this;
 
         //enumeration types for grading
@@ -32,22 +37,35 @@
         Init : function()
         {
             //timer
-
-            var count = 30;
-            var counter = setInterval(timer, 1000);
-
-            function timer()
+            if(this.Timer || this.Timer.enabled)
             {
-                count += - 1;
-                if(count <= 0)
-                {
-                    console.log("done!");
-                    clearInterval(counter);
-                    return;
-                }
-                console.log(count)
-            }
+                var count = this.Timer.max_time;
+                this.counter = setInterval(timer, 1000);
 
+                function timer()
+                {
+                    count += - 1;
+
+                    if(_scope.Timer.display)
+                    {
+                        _scope.Timer.element.html(formatTime(count));
+                    }
+
+                    if(count <= 0)
+                    {
+                        _scope.Grade();
+                        clearInterval(_scope.counter);
+                        return;
+                    }
+                }
+
+                function formatTime(seconds)
+                {
+                    var minutes = Math.floor(seconds / 60) < 10 ? "0" + Math.floor(seconds / 60) : Math.floor(seconds / 60);
+                    var seconds = Math.floor(seconds - (minutes * 60)) < 10 ? "0" + Math.floor(seconds - (minutes * 60)) : Math.floor(seconds - (minutes * 60));
+                    return minutes + ":" + seconds;
+                }
+            }
 
             //copy result html to data:
             this.Results.data('results', this.Results.html());
@@ -100,6 +118,10 @@
 
         Grade : function()
         {
+            if(this.Timer || this.Timer.enabled)
+            {
+                 clearInterval(_scope.counter);
+            }
             switch(this.Type)
             {
                 case Quiz.TYPE.WEIGHT:
@@ -186,6 +208,7 @@
                     }
                 })
             }
+            this.quizComplete = true;
         },
 
         ToggleQuestion : function(id)
@@ -211,6 +234,11 @@
                     _scope.UserWeights.push($(this).data("weight"));
                     //allow multiple choice:
                     ($(this).hasClass("userChoice")) ? $(this).removeClass("userChoice") : $(this).addClass("userChoice");
+
+                    if($(this).hasClass("correctAnswer"))
+                    {
+                        $(this).removeClass("correctAnswer")
+                    }
                 }
             });
 
@@ -219,7 +247,10 @@
             {
                 var width = $('#quiz_container').width();
                 var progress = width / this.Questions.length;
-                this.ProgressBar.width(progress * (this.CurrentQuestion + 1));
+
+                this.ProgressBar.animate({
+                    width : progress * (this.CurrentQuestion + 1)
+                }, 1000);
             }
 
             //Pagination:
@@ -238,21 +269,33 @@
                 this.Pager.find('li').on("click", function(){
                     _scope.ToggleQuestion($(this).data('page'));
                     _scope.ToggleUI();
-
                 });
+            }
+
+            //show user correct answers:
+            if(this.quizComplete && this.ShowCorrectAnswers)
+            {
+                answers.each(function(){
+                    if($(this).data('answer'))
+                    {
+                        $(this).addClass('correctAnswer');
+                    }
+                })
+            }
+
+            //disable user from correcting answers:
+            if(this.quizComplete && !this.AllowUserCorrection)
+            {
+                answers.off('click');
             }
         },
 
         ToggleUI : function(){
             if(_scope.Results.is(":visible"))
-            {
                 _scope.Results.hide();
-            }
 
             if(_scope.NextBtn.not(":visible"))
-            {
                 _scope.NextBtn.show();
-            }
         }
     };
 })(jQuery);
