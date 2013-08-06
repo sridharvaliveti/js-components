@@ -3,14 +3,60 @@
 <head>
     <title>Quiz Example</title>
 
-<link rel="stylesheet" href="style.css">
+
 <link rel="stylesheet" href="css/gumby.css">
+<link rel="stylesheet" href="style.css">
 
 </head>
+<script src="libs/modernizr-2.6.2.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <body>
 <div class="container">
+    <div class="row">
+        <form>
+            <div class="columns four">
+                <fieldset>
+                    <legend>Type of Quiz</legend>
+                    <ul>
+                        <li class="field">
+                            <label class="radio checked" for="radio1">
+                                <input name="radio" value="1" type="radio" id="radio1" checked="checked">
+                                <span><i class="icon-dot"></i></span> Survey Quiz
+                            </label>
+                        </li>
+                        <li class="field">
+                            <label class="radio" for="radio2">
+                                <input name="radio" value="2" type="radio" id="radio2">
+                                <span></span> Exact Quiz
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
+
+             <div class="columns four">
+                <fieldset>
+                    <legend>Timer options</legend>
+                    <ul>
+                        <li class="field">
+                            <label class="radio checked" for="radio1">
+                                <input name="radio" value="1" type="radio" id="radio1" checked="checked">
+                                <span><i class="icon-dot"></i></span> Survey Quiz
+                            </label>
+                        </li>
+                        <li class="field">
+                            <label class="radio" for="radio2">
+                                <input name="radio" value="2" type="radio" id="radio2">
+                                <span></span> Exact Quiz
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+
     <div class="row">
         <div id="quiz_container" class="answer_list" data-type="0" data-category="test">
             <!-- Quiz -->
@@ -144,6 +190,7 @@
      </div>
 </div>
 
+<script src="libs/gumby.min.js"></script>
 <script src="Quiz.js"></script>
 <script>
     var quiz;

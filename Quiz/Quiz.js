@@ -251,7 +251,7 @@
 
                 this.ProgressBar.animate({
                     width : progress * (this.CurrentQuestion + 1)
-                }, 1000);
+                }, 200);
             }
 
             //Pagination:
