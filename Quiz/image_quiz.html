@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Example</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/gumby.css">
+
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div id="quiz_container" class="answer_list" data-type="0" data-category="test">
+            <!-- Quiz -->
+            <div class="row">
+                <ul class="two_up tiles">
+                    <li> <h2><span>test</span></h2></li>
+                    <li> <div class="current_question"></div></li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="quiz_question twelve columns ">
+                    <ul>
+                        <h3>Question???</h3>
+
+                        <li class="four columns" data-weight="4">
+                            <div class="answer_content image rounded">
+                               <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+
+                        <li class="four columns" data-weight="2" data-answer="true">
+                            <div class="answer_content image rounded">
+                               <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+
+                        <li class="four columns" data-weight="1">
+                            <div class="answer_content image rounded">
+                               <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="quiz_question twelve columns">
+                    <ul>
+                        <h3>Question? Two</h3>
+                        <li class="four columns" data-weight="4" data-answer="true">
+                            <div class="answer_content image rounded">
+                              <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+
+                        <li class="four columns" data-weight="2" data-answer="true">
+                            <div class="answer_content image rounded">
+                                <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+
+                        <li class="four columns" data-weight="1">
+                            <div class="answer_content image rounded">
+                                 <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="quiz_question twelve columns">
+                    <ul>
+                        <h3>Question? THREE</h3>
+                        <li class="four columns" data-weight="2">
+                            <div class="answer_content image rounded">
+                               <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+
+                        <li class="four columns" data-weight="5">
+                            <div class="answer_content image rounded">
+                                <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+
+                        <li class="four columns" data-weight="4" data-answer="true">
+                            <div class="answer_content image rounded">
+                               <img src="img/img_silence_demo.jpg">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="results">
+                    <h2>your results:</h2>
+
+                    <h3 class="totalCorrect">
+                        total correct:
+                    </h3>
+
+                    <h3 class="totalPercent">
+                        percent:
+                    </h3>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="quiz_nav" class="twelve columns">
+                    <ul class="two_up tiles">
+                        <li><div class="back medium primary btn"><a href="#">BACK</a></div></li>
+                        <li><div class="next medium primary btn"><a href="#">NEXT</a></div></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+             <div class="columns twelve">
+                  <div id="progressBar"></div>
+             </div>
+        </div>
+
+        <div class="row">
+            <div class="columns twelve">
+                <div id="pager" class="twelve columns"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="columns twelve">
+                <div id="timer"></div>
+            </div>
+        </div>
+
+     </div>
+</div>
+
+<script src="Quiz.js"></script>
+<script>
+    var quiz;
+    var counter = {
+        enabled : true,
+        display : true,
+        max_time : 100,
+        element : $('#timer')
+    }
+    $(document).ready(function () {
+         quiz = new Quiz({
+            type: 1,
+            element: $('#quiz_container'),
+            backBtn: $('.back'),
+            nextBtn: $('.next'),
+            progressBar : $('#progressBar'),
+            pager : $('#pager'),
+            results: $('#results'),
+            timer : counter,
+            showCorrectAnswers : true,
+            allowUserCorrection : false
+        });
+
+        quiz.ToggleQuestion(0);
+    });
+</script>
+</body>
+</html>

@@ -160,6 +160,7 @@
                         answerKey.push({ answers : correctAnswers });
                         userKey.push({ answers : userAnswers})
                     });
+
                     //grade:
                     var totalCorrect = 0;
                     var passed = false;
