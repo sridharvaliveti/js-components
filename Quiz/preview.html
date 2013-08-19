@@ -35,22 +35,63 @@
                 </fieldset>
             </div>
 
+            <div class="columns four">
+                <fieldset>
+                    <legend>Quiz Options</legend>
+                    <ul>
+                        <li class="field">
+                            <label class="checkbox checked" for="checkbox3">
+                            <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                            <span><i class="icon-check"></i></span> Show Correct Answers
+                            </label>
+
+                            <label class="checkbox checked" for="checkbox3">
+                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                              <span><i class="icon-check"></i></span> Allow User Correction
+                            </label>
+
+                            <label class="checkbox checked" for="checkbox3">
+                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                              <span><i class="icon-check"></i></span> Back button
+                            </label>
+
+                            <label class="checkbox checked" for="checkbox3">
+                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                              <span><i class="icon-check"></i></span> Paginator
+                            </label>
+
+                            <label class="checkbox checked" for="checkbox3">
+                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                              <span><i class="icon-check"></i></span> Progress bar
+                            </label>
+
+                            <label class="checkbox checked" for="checkbox3">
+                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                              <span><i class="icon-check"></i></span> show results
+                            </label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </div>
+
              <div class="columns four">
                 <fieldset>
                     <legend>Timer options</legend>
                     <ul>
                         <li class="field">
-                            <label class="radio checked" for="radio1">
-                                <input name="radio" value="1" type="radio" id="radio1" checked="checked">
-                                <span><i class="icon-dot"></i></span> Survey Quiz
+                            <label class="checkbox" for="checkbox1">
+                                 <input name="checkbox1" type="checkbox" id="checkbox1"><span></span> Enabled
+                            </label>
+                            <label class="checkbox" for="checkbox2">
+                                <input name="checkbox2" type="checkbox" id="checkbox2">
+                                <span></span> Displayed
                             </label>
                         </li>
-                        <li class="field">
-                            <label class="radio" for="radio2">
-                                <input name="radio" value="2" type="radio" id="radio2">
-                                <span></span> Exact Quiz
-                            </label>
-                        </li>
+
+                         <li class="field">
+                                <label class="inline" for="quiz-opt-timer">Time in seconds:</label>
+                                <input id="quiz-opt-timer" class="numeric input" type="number" placeholder="Time in seconds">
+                         </li>
                     </ul>
                 </fieldset>
             </div>
@@ -197,7 +238,7 @@
     var counter = {
         enabled : true,
         display : true,
-        max_time : 100,
+        max_time : 120,
         element : $('#timer')
     }
     $(document).ready(function () {

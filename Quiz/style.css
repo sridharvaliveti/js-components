@@ -83,3 +83,8 @@ form fieldset {
 form fieldset legend {
   padding: 5px 10px;
 }
+
+#surveyResults
+{
+    display: none;
+}

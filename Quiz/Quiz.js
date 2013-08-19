@@ -132,7 +132,16 @@
                         totalWeight += this.UserWeights[currentAnswer];
                     }
 
-                    this.Results.show().html('total weight: ' + totalWeight);
+                    //weightMin weightMax
+                    this.Results.show().find("#surveyResults").show();
+                    this.Results.find("#surveyResults li").each(function(){
+
+                        if( totalWeight >= Number($(this).data("weightmin")) && totalWeight <= Number($(this).data("weightmax")))
+                            $(this).show();
+                        else
+                            $(this).hide();
+                    });
+
                     ResetPager();
 
                     break;
@@ -232,9 +241,21 @@
             answers.on({
                 'click' : function(e){
                     e.preventDefault();
-                    _scope.UserWeights.push($(this).data("weight"));
+                    console.log()
                     //allow multiple choice:
-                    ($(this).hasClass("userChoice")) ? $(this).removeClass("userChoice") : $(this).addClass("userChoice");
+                    if($(this).hasClass("userChoice"))
+                    {
+                        if(_scope.Type == Quiz.TYPE.WEIGHT)
+                            _scope.UserWeights.pop();
+
+                        $(this).removeClass("userChoice")
+                    }
+                    else{
+                        if(_scope.Type == Quiz.TYPE.WEIGHT)
+                            _scope.UserWeights.push($(this).data("weight"));
+
+                        $(this).addClass("userChoice");
+                    }
 
                     if($(this).hasClass("correctAnswer"))
                     {
