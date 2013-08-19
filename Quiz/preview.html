@@ -21,13 +21,13 @@
                     <ul>
                         <li class="field">
                             <label class="radio checked" for="radio1">
-                                <input name="radio" value="1" type="radio" id="radio1" checked="checked">
+                                <input name="radio" value="0" type="radio" id="radio1" checked="checked">
                                 <span><i class="icon-dot"></i></span> Survey Quiz
                             </label>
                         </li>
                         <li class="field">
                             <label class="radio" for="radio2">
-                                <input name="radio" value="2" type="radio" id="radio2">
+                                <input name="radio" value="1" type="radio" id="radio2">
                                 <span></span> Exact Quiz
                             </label>
                         </li>
@@ -40,13 +40,13 @@
                     <legend>Quiz Options</legend>
                     <ul>
                         <li class="field">
-                            <label class="checkbox checked" for="checkbox3">
-                            <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                            <label class="checkbox checked" for="checkbox1">
+                            <input name="checkbox1" checked="checked" type="checkbox" id="checkbox1">
                             <span><i class="icon-check"></i></span> Show Correct Answers
                             </label>
 
-                            <label class="checkbox checked" for="checkbox3">
-                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                            <label class="checkbox checked" for="checkbox2">
+                              <input name="checkbox2" checked="checked" type="checkbox" id="checkbox2">
                               <span><i class="icon-check"></i></span> Allow User Correction
                             </label>
 
@@ -55,18 +55,18 @@
                               <span><i class="icon-check"></i></span> Back button
                             </label>
 
-                            <label class="checkbox checked" for="checkbox3">
-                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                            <label class="checkbox checked" for="checkbox4">
+                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox4">
                               <span><i class="icon-check"></i></span> Paginator
                             </label>
 
-                            <label class="checkbox checked" for="checkbox3">
-                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                            <label class="checkbox checked" for="checkbox5">
+                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox5">
                               <span><i class="icon-check"></i></span> Progress bar
                             </label>
 
-                            <label class="checkbox checked" for="checkbox3">
-                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox3">
+                            <label class="checkbox checked" for="checkbox6">
+                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox6">
                               <span><i class="icon-check"></i></span> show results
                             </label>
                         </li>
@@ -79,23 +79,27 @@
                     <legend>Timer options</legend>
                     <ul>
                         <li class="field">
-                            <label class="checkbox" for="checkbox1">
-                                 <input name="checkbox1" type="checkbox" id="checkbox1"><span></span> Enabled
+                            <label class="checkbox" for="checkbox7">
+                                 <input name="checkbox7" type="checkbox" id="checkbox7"><span></span> Enabled
                             </label>
-                            <label class="checkbox" for="checkbox2">
-                                <input name="checkbox2" type="checkbox" id="checkbox2">
+                            <label class="checkbox" for="checkbox8">
+                                <input name="checkbox2" type="checkbox" id="checkbox8">
                                 <span></span> Displayed
                             </label>
                         </li>
 
                          <li class="field">
                                 <label class="inline" for="quiz-opt-timer">Time in seconds:</label>
-                                <input id="quiz-opt-timer" class="numeric input" type="number" placeholder="Time in seconds">
+                                <input id="quiz-opt-timer" value="120" class="numeric input" type="number" placeholder="Time in seconds">
                          </li>
                     </ul>
                 </fieldset>
             </div>
         </form>
+    </div>
+
+    <div class="row">
+        <div id="generate-btn" class="pretty medium primary btn"><a href="#">Generate</a></div>
     </div>
 
     <div class="row">
@@ -207,7 +211,6 @@
                     </ul>
                 </div>
             </div>
-
         </div>
 
         <div class="row">
@@ -234,28 +237,58 @@
 <script src="libs/gumby.min.js"></script>
 <script src="Quiz.js"></script>
 <script>
-    var quiz;
-    var counter = {
-        enabled : true,
-        display : true,
-        max_time : 120,
-        element : $('#timer')
-    }
-    $(document).ready(function () {
-         quiz = new Quiz({
-            type: 1,
-            element: $('#quiz_container'),
-            backBtn: $('.back'),
-            nextBtn: $('.next'),
-            progressBar : $('#progressBar'),
-            pager : $('#pager'),
-            results: $('#results'),
-            timer : counter,
-            showCorrectAnswers : true,
-            allowUserCorrection : true
-        });
 
-        quiz.ToggleQuestion(0);
+    $(document).ready(function () {
+
+        var quiz;
+
+        $("#generate-btn").on("click", function(e){
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            //counter:
+            var counter = {
+                enabled : $('#checkbox7').is(':checked'),
+                display : $('#checkbox8').is(':checked'),
+                max_time : Number($('#quiz-opt-timer').val()),
+                element : $('#timer')
+            }
+
+            //options
+            var progressBar = false;
+            var pagination = false;
+            if($('#checkbox5').is(':checked'))
+            {
+                progressBar = $('#progressBar');
+            }
+
+            if($('#checkbox4').is(':checked'))
+            {
+                pagination = $('#pager');
+            }
+
+            if(quiz)
+            {
+                quiz.Remove();
+                quiz = null;
+            }
+
+            quiz = new Quiz({
+                type: Number($('input:radio[name=radio]:checked').val()),
+                element: $('#quiz_container'),
+                backBtn: $('.back'),
+                nextBtn: $('.next'),
+                progressBar : progressBar,
+                pager : pagination,
+                results: $('#results'),
+                timer : counter,
+                showCorrectAnswers : $('#checkbox1').is(':checked'),
+                allowUserCorrection : $('#checkbox2').is(':checked')
+            });
+
+            quiz.ToggleQuestion(0);
+        })
     });
 </script>
 </body>

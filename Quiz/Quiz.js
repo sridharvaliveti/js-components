@@ -37,7 +37,7 @@
         Init : function()
         {
             //timer
-            if(this.Timer || this.Timer.enabled)
+            if(this.Timer.enabled)
             {
                 var count = this.Timer.max_time;
                 this.counter = setInterval(timer, 1000);
@@ -241,7 +241,7 @@
             answers.on({
                 'click' : function(e){
                     e.preventDefault();
-                    console.log()
+                    e.stopPropagation();
                     //allow multiple choice:
                     if($(this).hasClass("userChoice"))
                     {
@@ -318,6 +318,12 @@
 
             if(_scope.NextBtn.not(":visible"))
                 _scope.NextBtn.show();
+        },
+
+        Remove : function(){
+            //defensely clear interval
+            if(this.counter)
+                clearInterval(this.counter)
         }
     };
 })(jQuery);
