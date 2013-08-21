@@ -69,6 +69,11 @@
                               <input name="checkbox3" checked="checked" type="checkbox" id="checkbox6">
                               <span><i class="icon-check"></i></span> show results
                             </label>
+
+                            <label class="checkbox checked" for="checkbox-randomize">
+                              <input name="checkbox-randomize" checked="checked" type="checkbox" id="checkbox-randomize">
+                              <span><i class="icon-check"></i></span> randomize questions
+                            </label>
                         </li>
                     </ul>
                 </fieldset>
@@ -284,7 +289,8 @@
                 results: $('#results'),
                 timer : counter,
                 showCorrectAnswers : $('#checkbox1').is(':checked'),
-                allowUserCorrection : $('#checkbox2').is(':checked')
+                allowUserCorrection : $('#checkbox2').is(':checked'),
+                randomize : $('#checkbox-randomize').is(':checked')
             });
 
             quiz.ToggleQuestion(0);

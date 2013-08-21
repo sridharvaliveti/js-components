@@ -21,6 +21,7 @@
         this.quizComplete = false;
         this.counter;
         this.AllowUserCorrection = config.allowUserCorrection
+        this.Randomize = config.randomize;
         _scope = this;
 
         //enumeration types for grading
@@ -109,6 +110,24 @@
                        _scope.Grade();
                     }
                 });
+            }
+
+            this.Questions = this.Element.find($('.quiz_question'));
+            if(this.Randomize)
+                shuffle(this.Questions);
+
+            function shuffle(array) {
+                var counter = array.length, temp, index;
+                // While there are elements in the array
+                while (counter--) {
+                    // Pick a random index
+                    index = (Math.random() * counter) | 0;
+                    // And swap the last element with it
+                    temp = array[counter];
+                    array[counter] = array[index];
+                    array[index] = temp;
+                }
+                return array;
             }
         },
         /**
@@ -223,7 +242,8 @@
 
         ToggleQuestion : function(id)
         {
-            this.Questions = this.Element.find($('.quiz_question'));
+
+
             //hide all
             this.Questions.hide();
             //display specific:
@@ -321,7 +341,7 @@
         },
 
         Remove : function(){
-            //defensely clear interval
+            //defensively clear interval
             if(this.counter)
                 clearInterval(this.counter)
         }
