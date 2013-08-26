@@ -37,6 +37,7 @@
 
         Init : function()
         {
+            console.log("INTI!")
             //timer
             if(this.Timer.enabled)
             {
@@ -340,7 +341,7 @@
                 _scope.NextBtn.show();
         },
 
-        Remove : function(){
+        RemoveQuiz : function(){
             //defensively clear interval
             if(this.counter)
                 clearInterval(this.counter)

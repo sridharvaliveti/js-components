@@ -242,10 +242,8 @@
 <script src="libs/gumby.min.js"></script>
 <script src="Quiz.js"></script>
 <script>
-
+    var quiz;
     $(document).ready(function () {
-
-        var quiz;
 
         $("#generate-btn").on("click", function(e){
 
@@ -275,10 +273,10 @@
 
             if(quiz)
             {
-                quiz.Remove();
-                quiz = null;
+                quiz.RemoveQuiz();
             }
 
+            console.log(pagination)
             quiz = new Quiz({
                 type: Number($('input:radio[name=radio]:checked').val()),
                 element: $('#quiz_container'),
