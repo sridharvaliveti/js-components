@@ -56,17 +56,17 @@
                             </label>
 
                             <label class="checkbox checked" for="checkbox4">
-                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox4">
+                              <input name="checkbox4" checked="checked" type="checkbox" id="checkbox4">
                               <span><i class="icon-check"></i></span> Paginator
                             </label>
 
                             <label class="checkbox checked" for="checkbox5">
-                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox5">
+                              <input name="checkbox5" checked="checked" type="checkbox" id="checkbox5">
                               <span><i class="icon-check"></i></span> Progress bar
                             </label>
 
                             <label class="checkbox checked" for="checkbox6">
-                              <input name="checkbox3" checked="checked" type="checkbox" id="checkbox6">
+                              <input name="checkbox6" checked="checked" type="checkbox" id="checkbox6">
                               <span><i class="icon-check"></i></span> show results
                             </label>
 
@@ -279,6 +279,7 @@
             //options
             var progressBar = false;
             var pagination = false;
+            var backBtn = false;
             if($('#checkbox5').is(':checked'))
             {
                 progressBar = $('#progressBar');
@@ -289,6 +290,13 @@
                 pagination = $('#pager');
             }
 
+            if($('#checkbox3').is(':checked'))
+            {
+                console.log("PARSER")
+                backBtn = $('.back');
+            }
+
+
             if(quiz)
             {
                 quiz.RemoveQuiz();
@@ -298,7 +306,7 @@
             quiz = new Quiz({
                 type: Number($('input:radio[name=radio]:checked').val()),
                 element: $('#quiz_container'),
-                backBtn: $('.back'),
+                backBtn: backBtn,
                 nextBtn: $('.next'),
                 progressBar : progressBar,
                 pager : pagination,

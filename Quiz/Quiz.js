@@ -37,7 +37,6 @@
 
         Init : function()
         {
-            console.log("INTI!")
             //timer
             if(this.Timer.enabled)
             {
@@ -71,9 +70,11 @@
 
             //copy result html to data:
             this.Results.data('results', this.Results.html());
+
             //assign gui
             if(this.BackBtn)
             {
+                this.Element.find(this.BackBtn).show();
                 this.Element.find(this.BackBtn).on("click", function(e)
                 {
                     e.preventDefault();
@@ -113,10 +114,13 @@
                 });
             }
 
+            //get questions:
             this.Questions = this.Element.find($('.quiz_question'));
+            //randomize if nessesary
             if(this.Randomize)
                 shuffle(this.Questions);
 
+            //private shuffle method:
             function shuffle(array) {
                 var counter = array.length, temp, index;
                 // While there are elements in the array
@@ -138,12 +142,14 @@
 
         Grade : function()
         {
+            //clean up timer if available:
             if(this.Timer || this.Timer.enabled)
             {
                  clearInterval(_scope.counter);
             }
             switch(this.Type)
             {
+                //Weight Quiz:
                 case Quiz.TYPE.WEIGHT:
                     //grade using weights:
                     var totalWeight = 0;
@@ -166,6 +172,7 @@
 
                     break;
 
+                //Exact Answers:
                 case Quiz.TYPE.EXACT:
                     //build answer key:
                     var answerKey = [];
@@ -212,8 +219,8 @@
                     var percent = Math.ceil(total * 100);
                     this.Questions.hide();
 
+                    //handle results to user:
                     this.Results.html('').append(this.Results.data('results'));
-
                     this.Results.find(".totalCorrect").append(totalCorrect + ' / ' + this.Questions.length)
                     this.Results.find('.totalPercent').append(percent + '%');
                     this.Results.find(".totalCorrect").show();
@@ -231,6 +238,7 @@
                     //default behavior
             }
 
+            //resets the paginator:
             function ResetPager()
             {
                 _scope.Pager.find('li').each(function(){
@@ -245,8 +253,6 @@
 
         ToggleQuestion : function(id)
         {
-
-
             //hide all
             this.Questions.hide();
             //display specific:
@@ -335,6 +341,7 @@
             }
         },
 
+        //Toggle UI elements:
         ToggleUI : function(){
             if(_scope.Results.is(":visible"))
                 _scope.Results.hide();
@@ -343,6 +350,7 @@
                 _scope.NextBtn.show();
         },
 
+        //remove quiz:
         RemoveQuiz : function(){
             //defensively clear interval
             if(this.counter)
