@@ -6,22 +6,37 @@
      */
     Quiz = function (config) {
         config = (config = config || {});
+        //list of questions
         this.Questions = config.questions;
+        //quiz type
         this.Type = config.type;
+        //element that quiz lives inside
         this.Element = $(config.element);
+        //user weights for weighing quiz
         this.UserWeights = [];
+        //navigation
         this.BackBtn = $(config.backBtn);
         this.NextBtn = $(config.nextBtn);
+        //current question the user is viewing
         this.CurrentQuestion = null;
+        //progress bar element
         this.ProgressBar = $(config.progressBar);
+        //results element
         this.Results = $(config.results);
+        //pagination element
         this.Pager = $(config.pager);
+        //timer / counter interval for quiz
         this.Timer = config.timer;
-        this.ShowCorrectAnswers = config.showCorrectAnswers;
-        this.quizComplete = false;
         this.counter;
-        this.AllowUserCorrection = config.allowUserCorrection
+        //optional show correct answers to user
+        this.ShowCorrectAnswers = config.showCorrectAnswers;
+        //optional allow users to go back and correct the quiz
+        this.AllowUserCorrection = config.allowUserCorrection;
+        //optional randomizer
         this.Randomize = config.randomize;
+        //is quiz complete: only changed the first time the user is graded
+        this.quizComplete = false;
+        //the current quiz plugin scope
         _scope = this;
 
         //enumeration types for grading
@@ -46,12 +61,12 @@
                 function timer()
                 {
                     count += - 1;
-
+                    //display timer is option is available:
                     if(_scope.Timer.display)
                     {
                         _scope.Timer.element.html(formatTime(count));
                     }
-
+                    //on timer ended: grade and clean up
                     if(count <= 0)
                     {
                         _scope.Grade();
@@ -59,7 +74,7 @@
                         return;
                     }
                 }
-
+                //formats seconds into timecode: hh:mm:ss
                 function formatTime(seconds)
                 {
                     var minutes = Math.floor(seconds / 60) < 10 ? "0" + Math.floor(seconds / 60) : Math.floor(seconds / 60);
@@ -78,7 +93,7 @@
                 this.Element.find(this.BackBtn).on("click", function(e)
                 {
                     e.preventDefault();
-
+                    e.stopPropagation();
                     //shows next button if not on results:
                     _scope.ToggleUI();
 
@@ -101,6 +116,7 @@
                 this.Element.find(this.NextBtn).on("click", function(e)
                 {
                     e.preventDefault();
+                    e.stopPropagation();
 
                     if(_scope.CurrentQuestion < _scope.Element.find('.quiz_question').length -1)
                     {
@@ -197,7 +213,7 @@
                         userKey.push({ answers : userAnswers})
                     });
 
-                    //grade:
+                    //grade using key:
                     var totalCorrect = 0;
                     var passed = false;
                     for(var correctAnswer = 0; correctAnswer < answerKey.length; correctAnswer++)
@@ -235,7 +251,7 @@
                     break;
 
                 default:
-                    //default behavior
+                    //default behavior if needed
             }
 
             //resets the paginator:
@@ -263,9 +279,7 @@
 
             //choices:
             var answers = this.Questions.eq(id).find("li");
-            answers.css('cursor', 'pointer');
-            //events
-            //reset any click events:
+            //events : reset any click events
             answers.off('click');
             answers.on({
                 'click' : function(e){

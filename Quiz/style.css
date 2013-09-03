@@ -17,6 +17,7 @@
 .quiz_question li
 {
     color: #4f545b;
+    cursor: pointer;
 
 }
 
