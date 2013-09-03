@@ -88,3 +88,8 @@ form fieldset legend {
 {
     display: none;
 }
+
+.totalCorrect, .totalPercent
+{
+    display: none;
+}

@@ -216,6 +216,8 @@
 
                     this.Results.find(".totalCorrect").append(totalCorrect + ' / ' + this.Questions.length)
                     this.Results.find('.totalPercent').append(percent + '%');
+                    this.Results.find(".totalCorrect").show();
+                    this.Results.find('.totalPercent').show();
                     this.Results.show();
 
                     this.CurrentQuestion++;
