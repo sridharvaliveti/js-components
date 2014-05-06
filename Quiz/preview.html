@@ -261,10 +261,19 @@
 <script src="Quiz.js"></script>
 <script>
     var quiz;
+    var oldQuiz;
     $(document).ready(function () {
 
-        $("#generate-btn").on("click", function(e){
 
+        $("#generate-btn").on("click", function(e){
+            if(!oldQuiz){
+                oldQuiz = $('#quiz_container').parent().html();
+                console.log("save markup")
+            }
+            else{
+                $('#quiz_container').parent().html(oldQuiz);
+                console.log("remove it")
+            }
             e.preventDefault();
             e.stopPropagation();
 
@@ -292,7 +301,6 @@
 
             if($('#checkbox3').is(':checked'))
             {
-                console.log("PARSER")
                 backBtn = $('.back');
             }
 
