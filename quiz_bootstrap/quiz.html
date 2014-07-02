@@ -75,35 +75,120 @@
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner">
+  <div class="carousel-inner" data-type="0" data-category="test">
+         <!-- Quiz -->
+            <div class="row">
+                <ul class="two_up tiles">
+                    <li> <h2><span>test</span></h2></li>
+                    <li> <div class="current_question"></div></li>
+                </ul>
+            </div>
     <div class="item active">
-      <img src="..." alt="...">
+      <!--<img src="..." alt="...">-->
       <div class="carousel-caption">
-        <h3>question</h3>
-        <p>answer</p>
+          <div class="quiz_question twelve columns">
+                    <ul>
+                        <h3>Question? ONE</h3>
+                        <li data-weight="10" data-answer="true">
+                            <div class="answer_content">
+                                <a href="#">Sup Dun</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="2" data-answer="true">
+                            <div class="answer_content">
+                                 <a href="#">Jonty</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="5">
+                            <div class="answer_content">
+                                 <a href="#">Bevel</a>
+                            </div>
+                        </li>
+                    </ul>
+           </div>
       </div>
     </div>
     <div class="item">
-      <img src="..." alt="...">
       <div class="carousel-caption">
-         <h3>question</h3>
-        <p>answer</p>
+          <div class="quiz_question twelve columns">
+                    <ul>
+                        <h3>Question? Two</h3>
+                        <li data-weight="2" data-answer="true">
+                            <div class="answer_content">
+                                <a href="#">Shaman</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="4" data-answer="true">
+                            <div class="answer_content">
+                                 <a href="#">Druid</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="5">
+                            <div class="answer_content">
+                                 <a href="#">Warrior</a>
+                            </div>
+                        </li>
+                    </ul>
+           </div>
       </div>
     </div>
 
       <div class="item">
-      <img src="..." alt="...">
+
       <div class="carousel-caption">
-         <h3>question</h3>
-        <p>answer</p>
+         <div class="quiz_question twelve columns">
+                    <ul>
+                        <h3>Question? three</h3>
+                        <li data-weight="10" data-answer="true">
+                            <div class="answer_content">
+                                <a href="#">responsive</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="2" data-answer="true">
+                            <div class="answer_content">
+                                 <a href="#">carousel</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="5">
+                            <div class="answer_content">
+                                 <a href="#">antie</a>
+                            </div>
+                        </li>
+                    </ul>
+           </div>
       </div>
     </div>
 
         <div class="item">
-      <img src="..." alt="...">
       <div class="carousel-caption">
-         <h3>question</h3>
-        <p>answer</p>
+          <div class="quiz_question twelve columns">
+                    <ul>
+                        <h3>Question? four</h3>
+                        <li data-weight="10" data-answer="true">
+                            <div class="answer_content">
+                                <a href="#">pug</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="2" data-answer="true">
+                            <div class="answer_content">
+                                 <a href="#">007</a>
+                            </div>
+                        </li>
+
+                        <li data-weight="5">
+                            <div class="answer_content">
+                                 <a href="#">kllik</a>
+                            </div>
+                        </li>
+                    </ul>
+           </div>
       </div>
     </div>
   </div>
@@ -137,5 +222,48 @@
     <script src="javascripts/bootstrap/scrollspy.js"></script>
     <script src="javascripts/bootstrap/tab.js"></script>
     <script src="javascripts/bootstrap/transition.js"></script>
+   <script src="/javascripts/Quiz.js"></script>
+
+  <script>
+    var quiz;
+    var counter = {
+        enabled : true,
+        display : true,
+        max_time : 100,
+        element : $('#timer')
+    }
+
+    function nextTime(item){
+       console.log("fock drop")
+       //poop.carousel(item + 1);
+    }
+
+    var poop;
+    $(document).ready(function () {
+
+         quiz = new Quiz({
+            type: 1,
+            element: $('.carousel-inner'),
+            backBtn: $('.back'),
+            nextBtn: $('.right'),
+            progressBar : $('#progressBar'),
+            pager : $('#pager'),
+            results: $('#results'),
+            timer : counter,
+            showCorrectAnswers : true,
+            allowUserCorrection : true,
+            randomize : true,
+            questionInitCallback : nextTime
+        });
+
+         quiz.ToggleQuestion(0);
+
+         poop = $('.carousel').carousel({
+            interval: 5000
+        });
+
+    });
+</script>
+
   </body>
 </html>
