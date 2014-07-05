@@ -96,20 +96,7 @@
                 {
                     e.preventDefault();
                     e.stopPropagation();
-                    //shows next button if not on results:
-                    _scope.ToggleUI();
-
-                    //question back navigation:
-                    if(_scope.CurrentQuestion > 0)
-                    {
-                        _scope.CurrentQuestion--;
-                        _scope.ToggleQuestion(_scope.CurrentQuestion);
-                    }
-                    else
-                    {
-                        _scope.CurrentQuestion = 0;
-                        _scope.ToggleQuestion(_scope.CurrentQuestion);
-                    }
+                    _scope.Back(_scope.CurrentQuestion)
                 });
             }
 
@@ -119,22 +106,8 @@
                 this.NextBtn.on("click", function(e)
                 {
                     e.preventDefault();
-                    if(_scope.CurrentQuestion < _scope.Element.find('.quiz_question').length -1)
-                    {
-                        _scope.CurrentQuestion++;
-                        _scope.ToggleQuestion(_scope.CurrentQuestion);
-
-                         //check callback
-                        if(typeof _scope.QuestionInitCallback == 'function'){
-                            _scope.QuestionInitCallback.call(this, _scope.CurrentQuestion);
-                        }
-                    }
-                    else
-                    {
-                       _scope.CurrentQuestion++;
-                       _scope.ToggleQuestion(_scope.CurrentQuestion);
-                       _scope.Grade();
-                    }
+                    e.stopPropagation();
+                    _scope.Next(_scope.CurrentQuestion+1)
                 });
             }
 
@@ -166,7 +139,6 @@
 
         Grade : function()
         {
-            console.log("Gradomg")
             //clean up timer if available:
             if(this.Timer || this.Timer.enabled)
             {
@@ -184,7 +156,6 @@
                     }
 
                     //weightMin weightMax
-                    console.log("SHOW RESULTS")
                     this.Results.show();
                     this.Results.find("#surveyResults li").each(function(){
 
@@ -246,16 +217,18 @@
                     this.Questions.hide();
 
                     //handle results to user:
+                    this.Pager.append('<li class="pager-results-btn"><a href="#">results</a></li>');
+                    this.Pager.find(".pager-results-btn").addClass("active");
                     this.Results.html('').append(this.Results.data('results'));
                     this.Results.find('.totalCorrect').append(totalCorrect + ' / ' + this.Questions.length)
                     this.Results.find('.totalPercent').append(percent + '%');
                     this.Results.find('.totalCorrect').show();
                     this.Results.find('.totalPercent').show();
                     this.Results.show();
-                    this.CurrentQuestion++;
+                    //this.CurrentQuestion++;
                     //hide next btn on grade:
                     this.NextBtn.hide();
-                    ResetPager();
+                  //  ResetPager();
 
                     break;
 
@@ -330,6 +303,7 @@
             //Pagination:
             if(this.Pager)
             {
+                this.ToggleUI();
                 //todo: make this readable using jquery element creation instead of this crap:
                 var pager = '<li class="pager-back-btn" data-page="' + Number(this.CurrentQuestion - 1) + '"><a href="#">&laquo;</a></li>';
                 var activeClass = '';
@@ -341,6 +315,11 @@
 
                 pager += '<li class="pager-next-btn" data-page="' + Number(this.CurrentQuestion + 1) + '"><a href="#">&raquo;</a></li>';
 
+                if(this.quizComplete)
+                {
+                    pager += '<li class="pager-results-btn"><a href="#">results</a></li>';
+                }
+
                 this.Pager.html('');
                 this.Pager.append(pager);
                 this.Pager.find('li').on("click", function(){
@@ -350,6 +329,13 @@
                             break;
                         case "pager-next-btn":
                             _scope.Next($(this).data('page'));
+                            break;
+                        case "pager-results-btn":
+                        case "pager-results-btn active":
+                            if(!$(this).hasClass("active")){
+                                _scope.Results.show();
+                                $(this).addClass("active")
+                            }
                             break;
                         default:
                             _scope.ToggleQuestion($(this).data('page'));
@@ -376,7 +362,6 @@
         },
 
         Next : function(id){
-
             if(id < _scope.Questions.length)
             {
                 _scope.CurrentQuestion++;
@@ -384,7 +369,8 @@
             }
             else
             {
-                _scope.Grade();
+                if(!_scope.quizComplete)
+                    _scope.Grade();
             }
         },
 

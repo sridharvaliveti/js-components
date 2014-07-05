@@ -13,10 +13,6 @@
     <!-- Bootstrap core CSS -->
     <link href="stylesheets/styles.css" rel="stylesheet">
     <link href="stylesheets/caru.css" rel="stylesheet">
-
-
-
-
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -51,9 +47,9 @@
             <div class="row">
                 <div class="quiz_question col-md-12 ">
                    <h3>favorite class</h3>
-                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="10">shaman</button>
-                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="2" data-answer="true">warrior</button>
-                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="3">warlock</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="3">shaman</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="6" data-answer="true">warrior</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="1">warlock</button>
                 </div>
             </div>
 
@@ -76,7 +72,7 @@
             </div>
 
             <div id="test" class="row">
-                <div id="results">
+                <div id="results" class="col-md-12">
                     <h2>your results:</h2>
 
                     <div id="surveyResults">
@@ -110,13 +106,13 @@
 
             <div class="row">
                 <div id="quiz_nav" class="col-md-12">
-                    <ul class="two_up tiles">
-                        <li><div class="back medium primary btn"><a href="#">BACK</a></div></li>
-                        <li><div class="next medium primary btn"><a href="#">NEXT</a></div></li>
+
+                    <ul class="pager">
+                      <li class="previous back"><a href="#">Previous</a></li>
+                      <li class="next"><a href="#">Next</a></li>
                     </ul>
                 </div>
             </div>
-
         </div>
 
         <div class="row">
@@ -144,8 +140,6 @@
         </div>
 
      </div>
-
-
 
       </div>
       <div class="modal-footer">
