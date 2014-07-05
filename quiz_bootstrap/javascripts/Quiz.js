@@ -115,7 +115,7 @@
 
             if(this.NextBtn)
             {
-                console.log(this.NextBtn)
+
                 this.NextBtn.on("click", function(e)
                 {
                     e.preventDefault();
@@ -131,6 +131,8 @@
                     }
                     else
                     {
+                       _scope.CurrentQuestion++;
+                       _scope.ToggleQuestion(_scope.CurrentQuestion);
                        _scope.Grade();
                     }
                 });
@@ -164,6 +166,7 @@
 
         Grade : function()
         {
+            console.log("Gradomg")
             //clean up timer if available:
             if(this.Timer || this.Timer.enabled)
             {
@@ -181,7 +184,8 @@
                     }
 
                     //weightMin weightMax
-                    this.Results.show().find("#surveyResults").show();
+                    console.log("SHOW RESULTS")
+                    this.Results.show();
                     this.Results.find("#surveyResults li").each(function(){
 
                         if( totalWeight >= Number($(this).data("weightmin")) && totalWeight <= Number($(this).data("weightmax")))
@@ -200,18 +204,18 @@
                     var answerKey = [];
                     //user answers:
                     var userKey = [];
-                    this.Questions.find('ul').each(function(){
+                    this.Questions.each(function(){
                         var correctAnswers = [];
                         var userAnswers = [];
 
-                        $(this).find('li').each(function(){
+                        $(this).find('button').each(function(){
                             if($(this).data('answer'))
                             {
                                 correctAnswers.push($(this).html());
                             }
                         });
 
-                        $(this).find('.userChoice').each(function(){
+                        $(this).find('.active').each(function(){
                             userAnswers.push($(this).html());
                         });
 
@@ -243,12 +247,11 @@
 
                     //handle results to user:
                     this.Results.html('').append(this.Results.data('results'));
-                    this.Results.find(".totalCorrect").append(totalCorrect + ' / ' + this.Questions.length)
+                    this.Results.find('.totalCorrect').append(totalCorrect + ' / ' + this.Questions.length)
                     this.Results.find('.totalPercent').append(percent + '%');
-                    this.Results.find(".totalCorrect").show();
+                    this.Results.find('.totalCorrect').show();
                     this.Results.find('.totalPercent').show();
                     this.Results.show();
-
                     this.CurrentQuestion++;
                     //hide next btn on grade:
                     this.NextBtn.hide();
@@ -275,81 +278,82 @@
 
         ToggleQuestion : function(id)
         {
-            console.log("TOGGLE");
             //hide all
-            //this.Questions.hide();
+            this.Questions.hide();
             //display specific:
             this.Questions.eq(id).show();
             this.CurrentQuestion = id;
+
             var questionCounter = this.Element.find('.current_question');
             questionCounter.html("<h2>" + Number(id + 1) +  " / " + this.Questions.length + "</h2>");
 
             //choices:
-            var answers = this.Questions.eq(id).find("li");
-            console.log(answers)
+            var answers = this.Questions.eq(id).find("button");
             //events : reset any click events
-           // answers.off('click');
+            answers.off('click');
             answers.on({
                 'click' : function(e){
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log(this)
+
                     //allow multiple choice:
-                    if($(this).hasClass("userChoice"))
+                    if($(this).hasClass("active"))
                     {
                         if(_scope.Type == Quiz.TYPE.WEIGHT)
                             _scope.UserWeights.pop();
 
-                        $(this).removeClass("userChoice")
+                        $(this).removeClass("active")
                     }
                     else{
                         if(_scope.Type == Quiz.TYPE.WEIGHT)
                             _scope.UserWeights.push($(this).data("weight"));
 
-                        $(this).addClass("userChoice");
+                        $(this).addClass("active");
                     }
 
                     if($(this).hasClass("correctAnswer"))
                     {
                         $(this).removeClass("correctAnswer")
                     }
-
-                    //check if callback exists:
-                   /* if(typeof _scope.QuestionInitCallback == 'function'){
-                        console.log("FIRE")
-                        _scope.QuestionInitCallback.call(this, _scope.CurrentQuestion);
-                    }*/
-
                 }
             });
 
             //Update quiz progress:
             if(this.ProgressBar)
             {
-                var width = $('#quiz_container').width();
-                var progress = width / this.Questions.length;
-
-                this.ProgressBar.animate({
-                    width : progress * (this.CurrentQuestion + 1)
-                }, 200);
+                var progression = 100 / this.Questions.length;
+                var progress = progression * (this.CurrentQuestion + 1);
+                this.ProgressBar.children().attr("aria-valuenow", Math.round(progress));
+                this.ProgressBar.find(".progress-bar").css('width', progress + "%" );
             }
 
             //Pagination:
             if(this.Pager)
             {
-                var pager = '';
+                //todo: make this readable using jquery element creation instead of this crap:
+                var pager = '<li class="pager-back-btn" data-page="' + Number(this.CurrentQuestion - 1) + '"><a href="#">&laquo;</a></li>';
                 var activeClass = '';
                 for(var currentQuestion = 0; currentQuestion < this.Questions.length; currentQuestion++)
                 {
-                    (currentQuestion == this.CurrentQuestion) ? activeClass = "primary" : activeClass = "secondary"
-                    pager += '<li class="' + activeClass + ' badge" data-page="' + currentQuestion + '">' + Number(currentQuestion + 1) + '</li>';
+                    (currentQuestion == this.CurrentQuestion) ? activeClass = "active" : activeClass = "secondary"
+                    pager += '<li class="' + activeClass + '" data-page="' + currentQuestion + '"><a href="#">' + Number(currentQuestion + 1) + '</a></li>';
                 }
+
+                pager += '<li class="pager-next-btn" data-page="' + Number(this.CurrentQuestion + 1) + '"><a href="#">&raquo;</a></li>';
 
                 this.Pager.html('');
                 this.Pager.append(pager);
                 this.Pager.find('li').on("click", function(){
-                    _scope.ToggleQuestion($(this).data('page'));
-                    _scope.ToggleUI();
+                    switch($(this).attr('class')){
+                        case "pager-back-btn":
+                            _scope.Back($(this).data('page'));
+                            break;
+                        case "pager-next-btn":
+                            _scope.Next($(this).data('page'));
+                            break;
+                        default:
+                            _scope.ToggleQuestion($(this).data('page'));
+                    }
                 });
             }
 
@@ -359,7 +363,7 @@
                 answers.each(function(){
                     if($(this).data('answer'))
                     {
-                        $(this).addClass('correctAnswer');
+                        $(this).addClass('btn-success');
                     }
                 })
             }
@@ -371,6 +375,34 @@
             }
         },
 
+        Next : function(id){
+
+            if(id < _scope.Questions.length)
+            {
+                _scope.CurrentQuestion++;
+                _scope.ToggleQuestion(_scope.CurrentQuestion);
+            }
+            else
+            {
+                _scope.Grade();
+            }
+        },
+
+        Back : function(){
+            _scope.ToggleUI();
+
+            //question back navigation:
+            if(_scope.CurrentQuestion > 0)
+            {
+                _scope.CurrentQuestion--;
+                _scope.ToggleQuestion(_scope.CurrentQuestion);
+            }
+            else
+            {
+                _scope.CurrentQuestion = 0;
+                _scope.ToggleQuestion(_scope.CurrentQuestion);
+            }
+        },
         //Toggle UI elements:
         ToggleUI : function(){
             if(_scope.Results.is(":visible"))
@@ -382,7 +414,6 @@
 
         //remove quiz:
         RemoveQuiz : function(){
-            //defensively clear interval
             if(this.counter)
                 clearInterval(this.counter)
         }

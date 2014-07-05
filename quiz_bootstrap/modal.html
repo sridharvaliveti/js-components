@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Theme Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/styles.css" rel="stylesheet">
+    <link href="stylesheets/caru.css" rel="stylesheet">
+
+
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <!-- NAVBAR
+================================================== -->
+  <body>
+
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Quiz Time</h4>
+      </div>
+      <div class="modal-body">
+
+           <div class="row">
+        <div id="quiz_container" class="answer_list" data-type="0" data-category="test">
+            <!-- Quiz -->
+            <div class="row">
+                <ul class="two_up tiles">
+                    <li> <h2><span>test</span></h2></li>
+                    <li> <div class="current_question"></div></li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="quiz_question col-md-12 ">
+                   <h3>favorite class</h3>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="10">shaman</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="2" data-answer="true">warrior</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="3">warlock</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="quiz_question col-md-12">
+                  <h3>Question? THREE</h3>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="10">fock nig</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="2" data-answer="true">kepper</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="3">zimaboe</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="quiz_question col-md-12">
+                    <h3>Psssh</h3>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="10">smif</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="2" data-answer="true">lamont</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="3">heee-lick</button>
+                </div>
+            </div>
+
+            <div id="test" class="row">
+                <div id="results">
+                    <h2>your results:</h2>
+
+                    <div id="surveyResults">
+                        <li data-weightMin="0" data-weightMax="15">
+                            <p>You are a coolio foolio</p>
+                        </li>
+
+                         <li data-weightMin="16" data-weightMax="25">
+                            <p>You are a jimmah jon</p>
+                        </li>
+
+                         <li data-weightMin="26" data-weightMax="40">
+                            <p>You are a eep eeep oot</p>
+                        </li>
+
+                         <li data-weightMin="41" data-weightMax="55">
+                            <p>You are Zelda</p>
+                        </li>
+                    </div>
+
+                    <h3 class="totalCorrect">
+                        total correct:
+                    </h3>
+
+                    <h3 class="totalPercent">
+                        percent:
+                    </h3>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="quiz_nav" class="col-md-12">
+                    <ul class="two_up tiles">
+                        <li><div class="back medium primary btn"><a href="#">BACK</a></div></li>
+                        <li><div class="next medium primary btn"><a href="#">NEXT</a></div></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+             <div class="col-md-12">
+                  <div class="progress">
+                      <div class="progress-bar progress-bar-striped active"  role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100">
+                        <span class="sr-only">33% Complete</span>
+                      </div>
+                    </div>
+             </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+               <ul class="pagination">
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="timer"></div>
+            </div>
+        </div>
+
+     </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" role="form">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <!-- Button trigger modal -->
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+          Launch demo modal
+        </button>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="javascripts/bootstrap/tooltip.js"></script>
+    <script src="javascripts/bootstrap/alert.js"></script>
+    <script src="javascripts/bootstrap/button.js"></script>
+    <script src="javascripts/bootstrap/carousel.js"></script>
+    <script src="javascripts/bootstrap/collapse.js"></script>
+    <script src="javascripts/bootstrap/dropdown.js"></script>
+    <script src="javascripts/bootstrap/modal.js"></script>
+    <script src="javascripts/bootstrap/popover.js"></script>
+    <script src="javascripts/bootstrap/scrollspy.js"></script>
+    <script src="javascripts/bootstrap/tab.js"></script>
+    <script src="javascripts/bootstrap/transition.js"></script>
+   <script src="/javascripts/Quiz.js"></script>
+
+  <script>
+    var quiz;
+    var counter = {
+        enabled : true,
+        display : true,
+        max_time : 100,
+        element : $('#timer')
+    }
+
+    function nextTime(item){
+       console.log("fock drop")
+       //poop.carousel(item + 1);
+    }
+
+    var poop;
+    $(document).ready(function () {
+
+         quiz = new Quiz({
+             type: 1,
+            element: $('#quiz_container'),
+            backBtn: $('.back'),
+            nextBtn: $('.next'),
+            progressBar : $('.progress'),
+            pager : $('.pagination'),
+            results: $('#results'),
+            timer : counter,
+            showCorrectAnswers : true,
+            allowUserCorrection : true,
+            randomize : true
+        });
+
+         quiz.ToggleQuestion(0);
+
+         poop = $('.carousel').carousel({
+            interval: 5000
+        });
+
+    });
+</script>
+
+  </body>
+</html>
