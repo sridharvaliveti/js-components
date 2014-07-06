@@ -36,6 +36,19 @@
         this.Randomize = config.randomize;
         //is quiz complete: only changed the first time the user is graded
         this.quizComplete = false;
+        this.User = {
+            quizType : {
+                EXACT:{
+                    totalQuestions: 0,
+                    totalCorrect: 0,
+                    percent: 0
+                },
+                WEIGHT:{
+                    weighType: ""
+                },
+                duration: 0
+            }
+        }
         //callback that gets fired when question is initalized:
         this.QuestionInitCallback = config.questionInitCallback;
         //the current quiz plugin scope
@@ -66,7 +79,8 @@
                     //display timer is option is available:
                     if(_scope.Timer.display)
                     {
-                        _scope.Timer.element.html(formatTime(count));
+                        _scope.Timer.duration = count;
+                        _scope.Timer.element.html(formatTime(_scope.Timer.duration));
                     }
                     //on timer ended: grade and clean up
                     if(count <= 0)
@@ -102,7 +116,6 @@
 
             if(this.NextBtn)
             {
-
                 this.NextBtn.on("click", function(e)
                 {
                     e.preventDefault();
@@ -142,6 +155,7 @@
             //clean up timer if available:
             if(this.Timer || this.Timer.enabled)
             {
+                 this.User.quizType.duration = this.Timer.duration;
                  clearInterval(_scope.counter);
             }
             switch(this.Type)
@@ -165,7 +179,8 @@
                             $(this).hide();
                     });
 
-                    ResetPager();
+                    //update settings:
+                    this.User.quizType.WEIGHT.weighType = $(this).text();
 
                     break;
 
@@ -225,10 +240,13 @@
                     this.Results.find('.totalCorrect').show();
                     this.Results.find('.totalPercent').show();
                     this.Results.show();
-                    //this.CurrentQuestion++;
                     //hide next btn on grade:
                     this.NextBtn.hide();
-                  //  ResetPager();
+
+                    //update settings:
+                    this.User.quizType.EXACT.totalQuestions = this.Questions.length;
+                    this.User.quizType.EXACT.percent = percent;
+                    this.User.quizType.EXACT.totalCorrect = totalCorrect;
 
                     break;
 
@@ -247,6 +265,7 @@
                 })
             }
             this.quizComplete = true;
+            $(this).trigger("quizComplete", [this.User])
         },
 
         ToggleQuestion : function(id)
@@ -402,6 +421,10 @@
         RemoveQuiz : function(){
             if(this.counter)
                 clearInterval(this.counter)
+        },
+
+        GetUser : function(){
+            return this.User;
         }
     };
 })(jQuery);

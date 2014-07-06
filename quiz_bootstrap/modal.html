@@ -56,9 +56,9 @@
             <div class="row">
                 <div class="quiz_question col-md-12">
                   <h3>Question? THREE</h3>
-                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="10">fock nig</button>
-                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="2" data-answer="true">kepper</button>
-                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="3">zimaboe</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="10">healing wave</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="2" data-answer="true">healing Rain</button>
+                    <button type="button" class="btn btn-lg btn-default answer_content" data-weight="3">chain heal</button>
                 </div>
             </div>
 
@@ -247,7 +247,6 @@
        //poop.carousel(item + 1);
     }
 
-    var poop;
     $(document).ready(function () {
 
          quiz = new Quiz({
@@ -265,10 +264,9 @@
         });
 
          quiz.ToggleQuestion(0);
-
-         poop = $('.carousel').carousel({
-            interval: 5000
-        });
+        $(quiz).on("quizComplete", function(event, user){
+            console.log(user);
+        })
 
     });
 </script>
