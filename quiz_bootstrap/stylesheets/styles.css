@@ -6986,12 +6986,12 @@ button.close {
 /* line 94, ../../../../../../Library/Ruby/Gems/1.8/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_modals.scss */
 .modal-body {
   position: relative;
-  padding: 15px;
+  padding: 45px;
 }
 
 /* line 100, ../../../../../../Library/Ruby/Gems/1.8/gems/bootstrap-sass-3.1.1.1/vendor/assets/stylesheets/bootstrap/_modals.scss */
 .modal-footer {
-  padding: 15px;
+  padding: 45px;
   text-align: right;
   border-top: 1px solid #e5e5e5;
 }
@@ -7893,5 +7893,10 @@ button.close {
 }
 /* line 5, ../sass/styles.scss */
 #results {
+  display: none;
+}
+
+/* line 9, ../sass/styles.scss */
+#surveyResults {
   display: none;
 }

@@ -162,6 +162,7 @@
             {
                 //Weight Quiz:
                 case Quiz.TYPE.WEIGHT:
+                    this.Results.find("#surveyResults").show();
                     //grade using weights:
                     var totalWeight = 0;
                     for(var currentAnswer = 0; currentAnswer < this.UserWeights.length; currentAnswer++)
@@ -277,7 +278,7 @@
             this.CurrentQuestion = id;
 
             var questionCounter = this.Element.find('.current_question');
-            questionCounter.html("<h2>" + Number(id + 1) +  " / " + this.Questions.length + "</h2>");
+            questionCounter.html(Number(id + 1) +  " / " + this.Questions.length);
 
             //choices:
             var answers = this.Questions.eq(id).find("button");
@@ -353,6 +354,7 @@
                         case "pager-results-btn active":
                             if(!$(this).hasClass("active")){
                                 _scope.Results.show();
+                                _scope.Questions.hide();
                                 $(this).addClass("active")
                             }
                             break;
@@ -370,7 +372,7 @@
                     {
                         $(this).addClass('btn-success');
                     }
-                })
+                });
             }
 
             //disable user from correcting answers:
